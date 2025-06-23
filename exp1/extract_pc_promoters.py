@@ -14,7 +14,7 @@ Script to extract the TSS and promoter region for each protein-coding gene in pc
 import pandas as pd
 
 # Load pc.txt
-pc = pd.read_csv("./entex_data/expressed_gene.tissue_specificity/pc.txt", sep="\t", header=None, names=["gene", "num_tissues"])
+pc = pd.read_csv("../entex_data/expressed_gene.tissue_specificity/pc.txt", sep="\t", header=None, names=["gene", "num_tissues"])
 pc["gene_id"] = pc["gene"].str.extract(r"(ENSG\d+)")
 
 # Load GTF
