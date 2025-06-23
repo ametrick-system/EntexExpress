@@ -55,11 +55,12 @@ def compute_promoter(row):
         "end": end,
         "gene_id": row["gene_id"],
         "gene_name": row["gene_name"],
-        "strand": row["strand"]
+        "strand": row["strand"],
+        "num_tissues": row["num_tissues"]
     })
 
 promoters = pc_genes.apply(compute_promoter, axis=1)
 
 # Save BED file
 promoters.to_csv("promoters.bed", sep="\t", header=False, index=False)
-print(f"Wrote {len(promoters)} promoter regions to promoters.bed")
+print(f"Wrote {len(promoters)} promoter regions with expression metadata to promoters.bed")
