@@ -1,0 +1,519 @@
+[asm242@login1.mccleary EntexExpress]$ srun --partition=gpu_devel --gres=gpu:1 --cpus-per-task=2 --mem=8G --time=01:00:00 --pty bash
+srun: job 54891744 queued and waiting for resources
+srun: job 54891744 has been allocated resources
+[asm242@r102u10n01.mccleary EntexExpress]$ conda activate dnabert2
+(dnabert2)[asm242@r102u10n01.mccleary EntexExpress]$ cd exp1
+(dnabert2)[asm242@r102u10n01.mccleary exp1]$ ./finetune.sh
+Starting fine-tuning...
+/home/asm242/.conda/envs/dnabert2/lib/python3.8/site-packages/huggingface_hub/file_download.py:943: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+WARNING:root:Perform single sequence classification...
+WARNING:root:Perform single sequence classification...
+WARNING:root:Perform single sequence classification...
+/home/asm242/.cache/huggingface/modules/transformers_modules/zhihan1996/DNABERT-2-117M/d064dece8a8b41d9fb8729fbe3435278786931f1/bert_layers.py:126: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Some weights of the model checkpoint at zhihan1996/DNABERT-2-117M were not used when initializing BertForSequenceClassification: ['cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.predictions.decoder.bias', 'cls.predictions.transform.LayerNorm.weight']
+- This IS expected if you are initializing BertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at zhihan1996/DNABERT-2-117M and are newly initialized: ['classifier.weight', 'classifier.bias', 'bert.pooler.dense.weight', 'bert.pooler.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Using cuda_amp half precision backend
+***** Running training *****
+  Num examples = 12,800
+  Num Epochs = 5
+  Instantaneous batch size per device = 8
+  Total train batch size (w. parallel, distributed & accumulation) = 8
+  Gradient Accumulation steps = 1
+  Total optimization steps = 8,000
+  Number of trainable parameters = 117,070,082
+{'loss': 0.6651, 'learning_rate': 2.9811320754716983e-05, 'epoch': 0.06}                                                                                     
+{'loss': 0.6559, 'learning_rate': 2.9441509433962264e-05, 'epoch': 0.12}                                                                                     
+  2%|██▉                                                                                                                  | 200/8000 [00:18<11:28, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6717613339424133, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.3997, 'eval_samples_per_second': 470.634, 'eval_steps_per_second': 29.415, 'epoch': 0.12}                                
+  2%|██▉                                                                                                                  | 200/8000 [00:21<11:28, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-200                                                                               
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-200/special_tokens_map.json
+{'loss': 0.6679, 'learning_rate': 2.9064150943396225e-05, 'epoch': 0.19}                                                                                     
+{'loss': 0.674, 'learning_rate': 2.868679245283019e-05, 'epoch': 0.25}                                                                                       
+  5%|█████▊                                                                                                               | 400/8000 [00:41<11:08, 11.38it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.665509045124054, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.3894, 'eval_samples_per_second': 472.056, 'eval_steps_per_second': 29.504, 'epoch': 0.25}                                 
+  5%|█████▊                                                                                                               | 400/8000 [00:44<11:08, 11.38it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-400                                                                               
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-400/special_tokens_map.json
+{'loss': 0.6751, 'learning_rate': 2.830943396226415e-05, 'epoch': 0.31}                                                                                      
+{'loss': 0.6512, 'learning_rate': 2.7932075471698115e-05, 'epoch': 0.38}                                                                                     
+  8%|████████▊                                                                                                            | 600/8000 [01:04<10:52, 11.35it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6659936308860779, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4055, 'eval_samples_per_second': 469.829, 'eval_steps_per_second': 29.364, 'epoch': 0.38}                                
+  8%|████████▊                                                                                                            | 600/8000 [01:07<10:52, 11.35it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-600                                                                               
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-7200] due to args.save_total_limit
+{'loss': 0.675, 'learning_rate': 2.7554716981132076e-05, 'epoch': 0.44}                                                                                      
+{'loss': 0.671, 'learning_rate': 2.7177358490566037e-05, 'epoch': 0.5}                                                                                       
+ 10%|███████████▋                                                                                                         | 800/8000 [01:27<10:34, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6687426567077637, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4135, 'eval_samples_per_second': 468.724, 'eval_steps_per_second': 29.295, 'epoch': 0.5}                                 
+ 10%|███████████▋                                                                                                         | 800/8000 [01:31<10:34, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-800                                                                               
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-200] due to args.save_total_limit
+{'loss': 0.6668, 'learning_rate': 2.68e-05, 'epoch': 0.56}                                                                                                   
+{'loss': 0.659, 'learning_rate': 2.6422641509433962e-05, 'epoch': 0.62}                                                                                      
+ 12%|██████████████▌                                                                                                     | 1000/8000 [01:51<10:16, 11.35it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.668091893196106, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4192, 'eval_samples_per_second': 467.944, 'eval_steps_per_second': 29.247, 'epoch': 0.62}                                 
+ 12%|██████████████▌                                                                                                     | 1000/8000 [01:55<10:16, 11.35it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-1000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-600] due to args.save_total_limit
+{'loss': 0.6659, 'learning_rate': 2.6045283018867926e-05, 'epoch': 0.69}                                                                                     
+{'loss': 0.6589, 'learning_rate': 2.5667924528301887e-05, 'epoch': 0.75}                                                                                     
+ 15%|█████████████████▍                                                                                                  | 1200/8000 [02:15<09:59, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.665880560874939, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4202, 'eval_samples_per_second': 467.808, 'eval_steps_per_second': 29.238, 'epoch': 0.75}                                 
+ 15%|█████████████████▍                                                                                                  | 1200/8000 [02:18<09:59, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-1200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-800] due to args.save_total_limit
+{'loss': 0.667, 'learning_rate': 2.5290566037735848e-05, 'epoch': 0.81}                                                                                      
+{'loss': 0.6622, 'learning_rate': 2.4913207547169812e-05, 'epoch': 0.88}                                                                                     
+ 18%|████████████████████▎                                                                                               | 1400/8000 [02:38<09:42, 11.33it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6656944155693054, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4229, 'eval_samples_per_second': 467.44, 'eval_steps_per_second': 29.215, 'epoch': 0.88}                                 
+ 18%|████████████████████▎                                                                                               | 1400/8000 [02:42<09:42, 11.33it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-1400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-1000] due to args.save_total_limit
+{'loss': 0.6785, 'learning_rate': 2.4535849056603773e-05, 'epoch': 0.94}                                                                                     
+{'loss': 0.6722, 'learning_rate': 2.4158490566037738e-05, 'epoch': 1.0}                                                                                      
+ 20%|███████████████████████▏                                                                                            | 1600/8000 [03:02<09:23, 11.37it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.66644686460495, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4193, 'eval_samples_per_second': 467.933, 'eval_steps_per_second': 29.246, 'epoch': 1.0}                                   
+ 20%|███████████████████████▏                                                                                            | 1600/8000 [03:05<09:23, 11.37it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-1600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-1200] due to args.save_total_limit
+{'loss': 0.6712, 'learning_rate': 2.37811320754717e-05, 'epoch': 1.06}                                                                                       
+{'loss': 0.6788, 'learning_rate': 2.340377358490566e-05, 'epoch': 1.12}                                                                                      
+ 22%|██████████████████████████                                                                                          | 1800/8000 [03:25<09:05, 11.36it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6717562675476074, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4152, 'eval_samples_per_second': 468.493, 'eval_steps_per_second': 29.281, 'epoch': 1.12}                                
+ 22%|██████████████████████████                                                                                          | 1800/8000 [03:28<09:05, 11.36it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-1800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-1800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-1400] due to args.save_total_limit
+{'loss': 0.6637, 'learning_rate': 2.3026415094339624e-05, 'epoch': 1.19}                                                                                     
+{'loss': 0.6544, 'learning_rate': 2.2649056603773585e-05, 'epoch': 1.25}                                                                                     
+ 25%|█████████████████████████████                                                                                       | 2000/8000 [03:48<08:48, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6660251021385193, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4178, 'eval_samples_per_second': 468.131, 'eval_steps_per_second': 29.258, 'epoch': 1.25}                                
+ 25%|█████████████████████████████                                                                                       | 2000/8000 [03:52<08:48, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-2000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-1600] due to args.save_total_limit
+{'loss': 0.6721, 'learning_rate': 2.227169811320755e-05, 'epoch': 1.31}                                                                                      
+{'loss': 0.6644, 'learning_rate': 2.189433962264151e-05, 'epoch': 1.38}                                                                                      
+ 28%|███████████████████████████████▉                                                                                    | 2200/8000 [04:12<08:31, 11.33it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6660268902778625, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4139, 'eval_samples_per_second': 468.673, 'eval_steps_per_second': 29.292, 'epoch': 1.38}                                
+ 28%|███████████████████████████████▉                                                                                    | 2200/8000 [04:15<08:31, 11.33it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-2200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-1800] due to args.save_total_limit
+{'loss': 0.6701, 'learning_rate': 2.151698113207547e-05, 'epoch': 1.44}                                                                                      
+{'loss': 0.6608, 'learning_rate': 2.1139622641509436e-05, 'epoch': 1.5}                                                                                      
+ 30%|██████████████████████████████████▊                                                                                 | 2400/8000 [04:35<08:12, 11.37it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6661785840988159, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4172, 'eval_samples_per_second': 468.22, 'eval_steps_per_second': 29.264, 'epoch': 1.5}                                  
+ 30%|██████████████████████████████████▊                                                                                 | 2400/8000 [04:39<08:12, 11.37it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-2400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-2000] due to args.save_total_limit
+{'loss': 0.6631, 'learning_rate': 2.0762264150943397e-05, 'epoch': 1.56}                                                                                     
+{'loss': 0.6635, 'learning_rate': 2.038490566037736e-05, 'epoch': 1.62}                                                                                      
+ 32%|█████████████████████████████████████▋                                                                              | 2600/8000 [04:59<07:57, 11.30it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6674107313156128, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4145, 'eval_samples_per_second': 468.59, 'eval_steps_per_second': 29.287, 'epoch': 1.62}                                 
+ 32%|█████████████████████████████████████▋                                                                              | 2600/8000 [05:02<07:57, 11.30it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-2600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-2200] due to args.save_total_limit
+{'loss': 0.6495, 'learning_rate': 2.0007547169811322e-05, 'epoch': 1.69}                                                                                     
+{'loss': 0.6551, 'learning_rate': 1.9630188679245286e-05, 'epoch': 1.75}                                                                                     
+ 35%|████████████████████████████████████████▌                                                                           | 2800/8000 [05:22<07:38, 11.33it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6657484173774719, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4144, 'eval_samples_per_second': 468.601, 'eval_steps_per_second': 29.288, 'epoch': 1.75}                                
+ 35%|████████████████████████████████████████▌                                                                           | 2800/8000 [05:25<07:38, 11.33it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-2800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-2800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-2400] due to args.save_total_limit
+{'loss': 0.6634, 'learning_rate': 1.9252830188679247e-05, 'epoch': 1.81}                                                                                     
+{'loss': 0.671, 'learning_rate': 1.8875471698113208e-05, 'epoch': 1.88}                                                                                      
+ 38%|███████████████████████████████████████████▌                                                                        | 3000/8000 [05:45<07:20, 11.35it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6664516925811768, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4174, 'eval_samples_per_second': 468.188, 'eval_steps_per_second': 29.262, 'epoch': 1.88}                                
+ 38%|███████████████████████████████████████████▌                                                                        | 3000/8000 [05:49<07:20, 11.35it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-3000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-2600] due to args.save_total_limit
+{'loss': 0.6794, 'learning_rate': 1.8498113207547172e-05, 'epoch': 1.94}                                                                                     
+{'loss': 0.6567, 'learning_rate': 1.8120754716981133e-05, 'epoch': 2.0}                                                                                      
+ 40%|██████████████████████████████████████████████▍                                                                     | 3200/8000 [06:09<07:02, 11.37it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6674469113349915, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4195, 'eval_samples_per_second': 467.906, 'eval_steps_per_second': 29.244, 'epoch': 2.0}                                 
+ 40%|██████████████████████████████████████████████▍                                                                     | 3200/8000 [06:12<07:02, 11.37it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-3200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-2800] due to args.save_total_limit
+{'loss': 0.679, 'learning_rate': 1.7743396226415098e-05, 'epoch': 2.06}                                                                                      
+{'loss': 0.6691, 'learning_rate': 1.736603773584906e-05, 'epoch': 2.12}                                                                                      
+ 42%|█████████████████████████████████████████████████▎                                                                  | 3400/8000 [06:32<06:45, 11.33it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6656121611595154, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4147, 'eval_samples_per_second': 468.559, 'eval_steps_per_second': 29.285, 'epoch': 2.12}                                
+ 42%|█████████████████████████████████████████████████▎                                                                  | 3400/8000 [06:35<06:45, 11.33it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-3400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-3000] due to args.save_total_limit
+{'loss': 0.6598, 'learning_rate': 1.698867924528302e-05, 'epoch': 2.19}                                                                                      
+{'loss': 0.6665, 'learning_rate': 1.6611320754716984e-05, 'epoch': 2.25}                                                                                     
+ 45%|████████████████████████████████████████████████████▏                                                               | 3600/8000 [06:55<06:28, 11.32it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6657829284667969, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4191, 'eval_samples_per_second': 467.953, 'eval_steps_per_second': 29.247, 'epoch': 2.25}                                
+ 45%|████████████████████████████████████████████████████▏                                                               | 3600/8000 [06:59<06:28, 11.32it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-3600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-3200] due to args.save_total_limit
+{'loss': 0.6659, 'learning_rate': 1.623396226415094e-05, 'epoch': 2.31}                                                                                      
+{'loss': 0.6539, 'learning_rate': 1.5856603773584906e-05, 'epoch': 2.38}                                                                                     
+ 48%|███████████████████████████████████████████████████████                                                             | 3800/8000 [07:19<06:09, 11.37it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.666758120059967, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4173, 'eval_samples_per_second': 468.211, 'eval_steps_per_second': 29.263, 'epoch': 2.38}                                 
+ 48%|███████████████████████████████████████████████████████                                                             | 3800/8000 [07:22<06:09, 11.37it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-3800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-3800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-3400] due to args.save_total_limit
+{'loss': 0.6629, 'learning_rate': 1.5479245283018867e-05, 'epoch': 2.44}                                                                                     
+{'loss': 0.6659, 'learning_rate': 1.510188679245283e-05, 'epoch': 2.5}                                                                                       
+ 50%|██████████████████████████████████████████████████████████                                                          | 4000/8000 [07:42<05:52, 11.35it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6656187176704407, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4199, 'eval_samples_per_second': 467.844, 'eval_steps_per_second': 29.24, 'epoch': 2.5}                                  
+ 50%|██████████████████████████████████████████████████████████                                                          | 4000/8000 [07:46<05:52, 11.35it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-4000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-3600] due to args.save_total_limit
+{'loss': 0.6413, 'learning_rate': 1.4724528301886794e-05, 'epoch': 2.56}                                                                                     
+{'loss': 0.6758, 'learning_rate': 1.4347169811320755e-05, 'epoch': 2.62}                                                                                     
+ 52%|████████████████████████████████████████████████████████████▉                                                       | 4200/8000 [08:06<05:35, 11.31it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6656213402748108, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4182, 'eval_samples_per_second': 468.089, 'eval_steps_per_second': 29.256, 'epoch': 2.62}                                
+ 52%|████████████████████████████████████████████████████████████▉                                                       | 4200/8000 [08:09<05:35, 11.31it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-4200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-3800] due to args.save_total_limit
+{'loss': 0.6647, 'learning_rate': 1.3969811320754717e-05, 'epoch': 2.69}                                                                                     
+{'loss': 0.6571, 'learning_rate': 1.359245283018868e-05, 'epoch': 2.75}                                                                                      
+ 55%|███████████████████████████████████████████████████████████████▊                                                    | 4400/8000 [08:29<05:18, 11.29it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.667799711227417, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4236, 'eval_samples_per_second': 467.341, 'eval_steps_per_second': 29.209, 'epoch': 2.75}                                 
+ 55%|███████████████████████████████████████████████████████████████▊                                                    | 4400/8000 [08:32<05:18, 11.29it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-4400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-4000] due to args.save_total_limit
+{'loss': 0.6681, 'learning_rate': 1.3215094339622643e-05, 'epoch': 2.81}                                                                                     
+{'loss': 0.6633, 'learning_rate': 1.2837735849056605e-05, 'epoch': 2.88}                                                                                     
+ 57%|██████████████████████████████████████████████████████████████████▋                                                 | 4600/8000 [08:53<04:59, 11.35it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6656042337417603, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4153, 'eval_samples_per_second': 468.479, 'eval_steps_per_second': 29.28, 'epoch': 2.88}                                 
+ 57%|██████████████████████████████████████████████████████████████████▋                                                 | 4600/8000 [08:56<04:59, 11.35it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-4600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-4200] due to args.save_total_limit
+{'loss': 0.6638, 'learning_rate': 1.2460377358490566e-05, 'epoch': 2.94}                                                                                     
+{'loss': 0.6757, 'learning_rate': 1.2083018867924527e-05, 'epoch': 3.0}                                                                                      
+ 60%|█████████████████████████████████████████████████████████████████████▌                                              | 4800/8000 [09:16<04:41, 11.36it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6655073761940002, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.415, 'eval_samples_per_second': 468.523, 'eval_steps_per_second': 29.283, 'epoch': 3.0}                                  
+ 60%|█████████████████████████████████████████████████████████████████████▌                                              | 4800/8000 [09:19<04:41, 11.36it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-4800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-4800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-400] due to args.save_total_limit
+{'loss': 0.6487, 'learning_rate': 1.170566037735849e-05, 'epoch': 3.06}                                                                                      
+{'loss': 0.6549, 'learning_rate': 1.1328301886792453e-05, 'epoch': 3.12}                                                                                     
+ 62%|████████████████████████████████████████████████████████████████████████▌                                           | 5000/8000 [09:39<04:25, 11.32it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.666938304901123, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4183, 'eval_samples_per_second': 468.063, 'eval_steps_per_second': 29.254, 'epoch': 3.12}                                 
+ 62%|████████████████████████████████████████████████████████████████████████▌                                           | 5000/8000 [09:43<04:25, 11.32it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-5000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-4400] due to args.save_total_limit
+{'loss': 0.6605, 'learning_rate': 1.0950943396226415e-05, 'epoch': 3.19}                                                                                     
+{'loss': 0.6621, 'learning_rate': 1.0573584905660378e-05, 'epoch': 3.25}                                                                                     
+ 65%|███████████████████████████████████████████████████████████████████████████▍                                        | 5200/8000 [10:03<04:07, 11.33it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6663150191307068, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4174, 'eval_samples_per_second': 468.19, 'eval_steps_per_second': 29.262, 'epoch': 3.25}                                 
+ 65%|███████████████████████████████████████████████████████████████████████████▍                                        | 5200/8000 [10:06<04:07, 11.33it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-5200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-4600] due to args.save_total_limit
+{'loss': 0.663, 'learning_rate': 1.0196226415094339e-05, 'epoch': 3.31}                                                                                      
+{'loss': 0.6846, 'learning_rate': 9.818867924528301e-06, 'epoch': 3.38}                                                                                      
+ 68%|██████████████████████████████████████████████████████████████████████████████▎                                     | 5400/8000 [10:26<03:49, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.667128324508667, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4181, 'eval_samples_per_second': 468.094, 'eval_steps_per_second': 29.256, 'epoch': 3.38}                                 
+ 68%|██████████████████████████████████████████████████████████████████████████████▎                                     | 5400/8000 [10:30<03:49, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-5400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-5000] due to args.save_total_limit
+{'loss': 0.6568, 'learning_rate': 9.441509433962264e-06, 'epoch': 3.44}                                                                                      
+{'loss': 0.6766, 'learning_rate': 9.064150943396227e-06, 'epoch': 3.5}                                                                                       
+ 70%|█████████████████████████████████████████████████████████████████████████████████▏                                  | 5600/8000 [10:50<03:31, 11.33it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6660965085029602, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4211, 'eval_samples_per_second': 467.681, 'eval_steps_per_second': 29.23, 'epoch': 3.5}                                  
+ 70%|█████████████████████████████████████████████████████████████████████████████████▏                                  | 5600/8000 [10:53<03:31, 11.33it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-5600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-5200] due to args.save_total_limit
+{'loss': 0.6753, 'learning_rate': 8.68679245283019e-06, 'epoch': 3.56}                                                                                       
+{'loss': 0.6677, 'learning_rate': 8.309433962264152e-06, 'epoch': 3.62}                                                                                      
+ 72%|████████████████████████████████████████████████████████████████████████████████████                                | 5800/8000 [11:13<03:14, 11.29it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6658194065093994, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4205, 'eval_samples_per_second': 467.769, 'eval_steps_per_second': 29.236, 'epoch': 3.62}                                
+ 72%|████████████████████████████████████████████████████████████████████████████████████                                | 5800/8000 [11:16<03:14, 11.29it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-5800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-5800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-5400] due to args.save_total_limit
+{'loss': 0.655, 'learning_rate': 7.932075471698113e-06, 'epoch': 3.69}                                                                                       
+{'loss': 0.6603, 'learning_rate': 7.554716981132076e-06, 'epoch': 3.75}                                                                                      
+ 75%|███████████████████████████████████████████████████████████████████████████████████████                             | 6000/8000 [11:36<02:57, 11.30it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6657600402832031, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4232, 'eval_samples_per_second': 467.403, 'eval_steps_per_second': 29.213, 'epoch': 3.75}                                
+ 75%|███████████████████████████████████████████████████████████████████████████████████████                             | 6000/8000 [11:40<02:57, 11.30it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-6000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-5600] due to args.save_total_limit
+{'loss': 0.6768, 'learning_rate': 7.177358490566038e-06, 'epoch': 3.81}                                                                                      
+{'loss': 0.6662, 'learning_rate': 6.80377358490566e-06, 'epoch': 3.88}                                                                                       
+ 78%|█████████████████████████████████████████████████████████████████████████████████████████▉                          | 6200/8000 [12:00<02:38, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6654316782951355, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4226, 'eval_samples_per_second': 467.478, 'eval_steps_per_second': 29.217, 'epoch': 3.88}                                
+ 78%|█████████████████████████████████████████████████████████████████████████████████████████▉                          | 6200/8000 [12:03<02:38, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-6200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-4800] due to args.save_total_limit
+{'loss': 0.6574, 'learning_rate': 6.426415094339623e-06, 'epoch': 3.94}                                                                                      
+{'loss': 0.6576, 'learning_rate': 6.049056603773585e-06, 'epoch': 4.0}                                                                                       
+ 80%|████████████████████████████████████████████████████████████████████████████████████████████▊                       | 6400/8000 [12:23<02:21, 11.30it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6658962965011597, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4204, 'eval_samples_per_second': 467.783, 'eval_steps_per_second': 29.236, 'epoch': 4.0}                                 
+ 80%|████████████████████████████████████████████████████████████████████████████████████████████▊                       | 6400/8000 [12:27<02:21, 11.30it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-6400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-5800] due to args.save_total_limit
+{'loss': 0.6629, 'learning_rate': 5.671698113207547e-06, 'epoch': 4.06}                                                                                      
+{'loss': 0.6528, 'learning_rate': 5.29433962264151e-06, 'epoch': 4.12}                                                                                       
+ 82%|███████████████████████████████████████████████████████████████████████████████████████████████▋                    | 6600/8000 [12:47<02:03, 11.31it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6663832068443298, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4188, 'eval_samples_per_second': 467.996, 'eval_steps_per_second': 29.25, 'epoch': 4.12}                                 
+ 82%|███████████████████████████████████████████████████████████████████████████████████████████████▋                    | 6600/8000 [12:50<02:03, 11.31it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-6600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-6000] due to args.save_total_limit
+{'loss': 0.6683, 'learning_rate': 4.916981132075472e-06, 'epoch': 4.19}                                                                                      
+{'loss': 0.6689, 'learning_rate': 4.539622641509434e-06, 'epoch': 4.25}                                                                                      
+ 85%|██████████████████████████████████████████████████████████████████████████████████████████████████▌                 | 6800/8000 [13:10<01:45, 11.35it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6655975580215454, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.417, 'eval_samples_per_second': 468.252, 'eval_steps_per_second': 29.266, 'epoch': 4.25}                                 
+ 85%|██████████████████████████████████████████████████████████████████████████████████████████████████▌                 | 6800/8000 [13:14<01:45, 11.35it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-6800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-6800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-6400] due to args.save_total_limit
+{'loss': 0.6534, 'learning_rate': 4.162264150943397e-06, 'epoch': 4.31}                                                                                      
+{'loss': 0.6777, 'learning_rate': 3.7849056603773584e-06, 'epoch': 4.38}                                                                                     
+ 88%|█████████████████████████████████████████████████████████████████████████████████████████████████████▌              | 7000/8000 [13:34<01:28, 11.32it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6655937433242798, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4223, 'eval_samples_per_second': 467.516, 'eval_steps_per_second': 29.22, 'epoch': 4.38}                                 
+ 88%|█████████████████████████████████████████████████████████████████████████████████████████████████████▌              | 7000/8000 [13:37<01:28, 11.32it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-7000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-6600] due to args.save_total_limit
+{'loss': 0.6517, 'learning_rate': 3.407547169811321e-06, 'epoch': 4.44}                                                                                      
+{'loss': 0.6735, 'learning_rate': 3.030188679245283e-06, 'epoch': 4.5}                                                                                       
+ 90%|████████████████████████████████████████████████████████████████████████████████████████████████████████▍           | 7200/8000 [13:57<01:10, 11.34it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6657565236091614, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4237, 'eval_samples_per_second': 467.335, 'eval_steps_per_second': 29.208, 'epoch': 4.5}                                 
+ 90%|████████████████████████████████████████████████████████████████████████████████████████████████████████▍           | 7200/8000 [14:00<01:10, 11.34it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-7200                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7200/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7200/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7200/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7200/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-6800] due to args.save_total_limit
+{'loss': 0.6624, 'learning_rate': 2.652830188679245e-06, 'epoch': 4.56}                                                                                      
+{'loss': 0.6749, 'learning_rate': 2.2754716981132078e-06, 'epoch': 4.62}                                                                                     
+ 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▎        | 7400/8000 [14:20<00:53, 11.31it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.665571928024292, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4216, 'eval_samples_per_second': 467.611, 'eval_steps_per_second': 29.226, 'epoch': 4.62}                                 
+ 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▎        | 7400/8000 [14:24<00:53, 11.31it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-7400                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7400/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7400/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7400/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7400/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-7000] due to args.save_total_limit
+{'loss': 0.6626, 'learning_rate': 1.89811320754717e-06, 'epoch': 4.69}                                                                                       
+{'loss': 0.6645, 'learning_rate': 1.520754716981132e-06, 'epoch': 4.75}                                                                                      
+ 95%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▏     | 7600/8000 [14:44<00:35, 11.32it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6655060052871704, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4253, 'eval_samples_per_second': 467.107, 'eval_steps_per_second': 29.194, 'epoch': 4.75}                                
+ 95%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▏     | 7600/8000 [14:47<00:35, 11.32it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-7600                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7600/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7600/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7600/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7600/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-7200] due to args.save_total_limit
+{'loss': 0.6524, 'learning_rate': 1.1433962264150944e-06, 'epoch': 4.81}                                                                                     
+{'loss': 0.6501, 'learning_rate': 7.660377358490567e-07, 'epoch': 4.88}                                                                                      
+ 98%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████   | 7800/8000 [15:07<00:17, 11.31it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6658028960227966, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4229, 'eval_samples_per_second': 467.444, 'eval_steps_per_second': 29.215, 'epoch': 4.88}                                
+ 98%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████   | 7800/8000 [15:11<00:17, 11.31it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-7800                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7800/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7800/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7800/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-7800/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-7400] due to args.save_total_limit
+{'loss': 0.6791, 'learning_rate': 3.886792452830189e-07, 'epoch': 4.94}                                                                                      
+{'loss': 0.6692, 'learning_rate': 1.1320754716981132e-08, 'epoch': 5.0}                                                                                      
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8000/8000 [15:31<00:00, 11.39it/s]***** Running Evaluation *****
+  Num examples = 1600
+  Batch size = 16
+{'eval_loss': 0.6657804846763611, 'eval_accuracy': 0.616875, 'eval_f1': 0.3815229996134519, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.3084375, 'eval_recall': 0.5, 'eval_runtime': 3.4226, 'eval_samples_per_second': 467.478, 'eval_steps_per_second': 29.217, 'epoch': 5.0}                                 
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8000/8000 [15:34<00:00, 11.39it/sSaving model checkpoint to /home/asm242/EntexExpress/exp1/output/checkpoint-8000                                                                              
+Configuration saved in /home/asm242/EntexExpress/exp1/output/checkpoint-8000/config.json
+Model weights saved in /home/asm242/EntexExpress/exp1/output/checkpoint-8000/pytorch_model.bin
+tokenizer config file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-8000/tokenizer_config.json
+Special tokens file saved in /home/asm242/EntexExpress/exp1/output/checkpoint-8000/special_tokens_map.json
+Deleting older checkpoint [/home/asm242/EntexExpress/exp1/output/checkpoint-7600] due to args.save_total_limit
+
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+Loading best model from /home/asm242/EntexExpress/exp1/output/checkpoint-6200 (score: 0.6654316782951355).
+{'train_runtime': 937.6978, 'train_samples_per_second': 68.252, 'train_steps_per_second': 8.532, 'train_loss': 0.6647888889312744, 'epoch': 5.0}             
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8000/8000 [15:37<00:00,  8.53it/s]
+***** Running Evaluation *****
+  Num examples = 1601
+  Batch size = 16
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 101/101 [00:03<00:00, 29.66it/s]
+(dnabert2)[asm242@r102u10n01.mccleary exp1]$ 

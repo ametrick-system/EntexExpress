@@ -6,8 +6,10 @@ export DATA_PATH=~/EntexExpress/exp1/input
 export MAX_LENGTH=300 # set to 0.25 * your sequence length (1200)
 export LR=3e-5
 
+echo "Starting fine-tuning..."
+
 # Training use DataParallel
-python train.py \
+python3 train.py \
     --model_name_or_path zhihan1996/DNABERT-2-117M \
     --data_path  ${DATA_PATH} \
     --kmer -1 \
