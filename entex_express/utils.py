@@ -10,9 +10,9 @@ def convert_to_csv_input(fasta_file, bed_file, output_prefix, task, threshold, s
         for line in f:
             parts = line.strip().split("\t")
             if len(parts) >= 7:
-                gene_id = parts[3].split(".")[0]  # Strip version if present
+                gene_id = parts[3].split(".")[0] # strip Ensembl version if present
                 try:
-                    num_tissues = int(parts[6])  # Correct column
+                    num_tissues = int(parts[6])
                     gene_to_count[gene_id] = num_tissues
                 except ValueError:
                     continue  # skip lines with bad counts
