@@ -34,6 +34,7 @@ Here is a table that presents the results stored in ``output/results/DNABERT2_ex
 | `eval_recall`               | 0.500  | Half of true positives were found                                     |
 | `eval_matthews_correlation` | 0.000  | Suggests predictions are not better than random chance from a correlation perspective (more sensitive than accuracy) |
 
+## Conclusion
 The F1 result suggested that the data might not have been balanced. Sure enough (as discovered in ``interpret_results.py``), there were 7946 1's and 4854 0's in ``train.csv``, indicating that 20 is not a good threshold for separating between 1/0. 
 
 
