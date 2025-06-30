@@ -3,7 +3,7 @@ import pandas as pd
 import random
 import os
 
-def convert_to_csv_input(fasta_file, bed_file, output_prefix, task, threshold, split_ratio=(0.8, 0.1, 0.1)):
+def convert_to_csv_input(fasta_file, bed_file, output_prefix, task, cutoffs, split_ratio=(0.8, 0.1, 0.1)):
     # Load gene → num_tissues from BED
     gene_to_count = {}
     with open(bed_file) as f:
@@ -34,12 +34,18 @@ def convert_to_csv_input(fasta_file, bed_file, output_prefix, task, threshold, s
         if "N" in sequence:
             continue
 
-        if task == "binary":
-            label = 1 if num_tissues > threshold else 0
+        if task == "bins": # cutoffs[i] stores the lowest value of the i-th bin
+            found = False
+            for i in range(len(cutoffs)-1):
+                if num_tissues >= cutoffs[i] and num_tissues < cutoffs[i+1]:
+                    label = i
+                    found = True
+            if found == False:
+                label = len(cutoffs)-1
         elif task == "regression":
             label = num_tissues
         else:
-            raise ValueError("task must be 'binary' or 'regression'")
+            raise ValueError("task must be 'bins' or 'regression'")
 
         records.append((sequence, label))
 

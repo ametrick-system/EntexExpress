@@ -1,7 +1,7 @@
 import pandas as pd
 from entex_express.utils import convert_to_csv_input
 
-convert_to_csv_input("promoters.fa", "promoters.bed", output_prefix="input", task="binary", threshold=27)
+convert_to_csv_input("promoters.fa", "promoters.bed", output_prefix="input", task="bins", cutoffs=[0, 28])
 
 # ensure balanced input
 df = pd.read_csv("input/train.csv")
