@@ -4,7 +4,7 @@
 
 - **Subquestion 1 (Experiments 1-2):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed (i.e., active in many tissues) based solely on its promoter sequence?
 
-## Environment Setup
+## Environment Setup (DNABERT-2)
 
 > Note: start in home directory
 
@@ -27,4 +27,12 @@ git clone https://github.com/MAGICS-LAB/DNABERT_2.git
 cd DNABERT_2
 python3 -m pip install -r requirements.txt
 pip install biopython
+```
+
+## Environment Setup (AlphaGenome)
+
+```bash
+conda create -n alphagenome-env python=3.11
+conda activate alphagenome-env
+pip install -U alphagenome
 ```
