@@ -43,6 +43,9 @@ promoters_df = pd.DataFrame(
 )
 promoters_df["gene_id_clean"] = promoters_df["gene_id"].str.replace(r"\.\d+", "", regex=True)
 
+# Keep only the first promoter per gene
+promoters_df = promoters_df.drop_duplicates(subset="gene_id_clean", keep="first")
+
 # Load the full GTEx GCT file (skip first 2 header rows)
 gtex_expr_path = "~/LargeFiles/GTEx_Analysis_v10_RNASeQCv2.4.2_gene_median_tpm.gct"
 gtex_df = pd.read_csv(os.path.expanduser(gtex_expr_path), sep='\t', skiprows=2)
@@ -62,6 +65,19 @@ merged = promoters_df.merge(
 # Write BED file
 bed_df = merged[['seqname', 'start_promoter', 'end_promoter', 'gene_id_clean', 'Brain_Substantia_nigra', 'log_tpm', 'strand']]
 bed_df.columns = ['chr', 'start', 'end', 'gene_id', 'tpm', 'log_tpm', 'strand']
-bed_df.to_csv("promoters_brain_substantia_nigra.bed", sep='\t', header=False, index=False)
+
+bed_df["name"] = (
+    bed_df["gene_id"]
+    + "|chr=" + bed_df["chr"]
+    + ":" + bed_df["start"].astype(str) + "-" + bed_df["end"].astype(str)
+    + "|TPM=" + bed_df["tpm"].round(3).astype(str)
+    + "|logTPM=" + bed_df["log_tpm"].round(3).astype(str)
+)
+
+# Select and rename columns for BED
+bed_df_final = bed_df[['chr', 'start', 'end', 'name', 'tpm', 'log_tpm', 'strand']]
+
+# Write BED file
+bed_df_final.to_csv("promoters_brain_substantia_nigra.bed", sep='\t', header=False, index=False)
 
 print("BED file saved: promoters_brain_substantia_nigra.bed")
