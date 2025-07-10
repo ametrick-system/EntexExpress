@@ -1,0 +1,14 @@
+Starting fine-tuning...
+/home/asm242/.conda/envs/dnabert2/lib/python3.8/site-packages/huggingface_hub/file_download.py:943: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+WARNING:root:Perform single sequence classification...
+Traceback (most recent call last):
+  File "train.py", line 309, in <module>
+    train()
+  File "train.py", line 248, in train
+    train_dataset = SupervisedDataset(tokenizer=tokenizer, 
+  File "train.py", line 128, in __init__
+    labels = [int(d[1]) for d in data]
+  File "train.py", line 128, in <listcomp>
+    labels = [int(d[1]) for d in data]
+ValueError: invalid literal for int() with base 10: '2.018'

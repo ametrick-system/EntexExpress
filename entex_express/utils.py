@@ -3,6 +3,50 @@ import pandas as pd
 import random
 import os
 
+def convert_to_csv_input_tpms(fasta_file, output_prefix, task, cutoffs=None, split_ratio=(0.8, 0.1, 0.1)):
+    records = []
+    for record in SeqIO.parse(fasta_file, "fasta"):
+        header = record.description
+        gene_id, _, _, log_tpm_str = header.split("|")
+        log_tpm = float(log_tpm_str.split("=")[1].split("::")[0])
+        
+        sequence = str(record.seq).upper()
+        if "N" in sequence:
+            continue
+
+        if task == "bins": # cutoffs[i] stores the lowest value of the i-th bin
+            found = False
+            for i in range(len(cutoffs)-1):
+                if log_tpm >= cutoffs[i] and log_tpm < cutoffs[i+1]:
+                    label = i
+                    found = True
+            if found == False:
+                label = len(cutoffs)-1
+        elif task == "regression":
+            label = log_tpm
+        else:
+            raise ValueError("task must be 'bins' or 'regression'")
+
+        records.append((sequence, label))
+
+    random.shuffle(records)
+    total = len(records)
+    n_train = int(split_ratio[0] * total)
+    n_dev = int(split_ratio[1] * total)
+
+    datasets = {
+        "train.csv": records[:n_train],
+        "dev.csv": records[n_train:n_train + n_dev],
+        "test.csv": records[n_train + n_dev:]
+    }
+
+    os.makedirs(output_prefix, exist_ok=True)
+    for name, data in datasets.items():
+        df = pd.DataFrame(data, columns=["sequence", "label"])
+        df.to_csv(f"{output_prefix}/{name}", index=False)
+
+    print(f"Saved {len(records)} total examples to {output_prefix}/")
+
 def convert_to_csv_input(fasta_file, bed_file, output_prefix, task, cutoffs, split_ratio=(0.8, 0.1, 0.1)):
     # Load gene → num_tissues from BED
     gene_to_count = {}

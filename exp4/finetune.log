@@ -1908,3 +1908,17 @@ Loading best model from /home/asm242/EntexExpress/exp4/output/checkpoint-5600 (s
 {'eval_loss': 1.0996856689453125, 'eval_accuracy': 0.31625, 'eval_f1': 0.1601772712883824, 'eval_matthews_correlation': 0.0, 'eval_precision': 0.10541666666666666, 'eval_recall': 0.3333333333333333, 'eval_runtime': 3.425, 'eval_samples_per_second': 467.148, 'eval_steps_per_second': 29.197, 'epoch': 5.0}
 {'train_runtime': 915.675, 'train_samples_per_second': 69.894, 'train_steps_per_second': 8.737, 'train_loss': 1.1003867950439452, 'epoch': 5.0}
   0%|          | 0/101 [00:00<?, ?it/s]  4%|▍         | 4/101 [00:00<00:02, 38.72it/s]  8%|▊         | 8/101 [00:00<00:02, 32.55it/s] 12%|█▏        | 12/101 [00:00<00:02, 31.26it/s] 16%|█▌        | 16/101 [00:00<00:02, 30.67it/s] 20%|█▉        | 20/101 [00:00<00:02, 30.35it/s] 24%|██▍       | 24/101 [00:00<00:02, 30.17it/s] 28%|██▊       | 28/101 [00:00<00:02, 30.07it/s] 32%|███▏      | 32/101 [00:01<00:02, 29.91it/s] 35%|███▍      | 35/101 [00:01<00:02, 29.74it/s] 38%|███▊      | 38/101 [00:01<00:02, 29.67it/s] 41%|████      | 41/101 [00:01<00:02, 29.70it/s] 44%|████▎     | 44/101 [00:01<00:01, 29.72it/s] 47%|████▋     | 47/101 [00:01<00:01, 29.70it/s] 50%|████▉     | 50/101 [00:01<00:01, 29.74it/s] 52%|█████▏    | 53/101 [00:01<00:01, 29.76it/s] 55%|█████▌    | 56/101 [00:01<00:01, 29.78it/s] 58%|█████▊    | 59/101 [00:01<00:01, 29.79it/s] 61%|██████▏   | 62/101 [00:02<00:01, 29.65it/s] 64%|██████▍   | 65/101 [00:02<00:01, 29.62it/s] 67%|██████▋   | 68/101 [00:02<00:01, 29.62it/s] 70%|███████   | 71/101 [00:02<00:01, 29.57it/s] 73%|███████▎  | 74/101 [00:02<00:00, 29.64it/s] 76%|███████▌  | 77/101 [00:02<00:00, 29.64it/s] 79%|███████▉  | 80/101 [00:02<00:00, 29.66it/s] 82%|████████▏ | 83/101 [00:02<00:00, 29.72it/s] 85%|████████▌ | 86/101 [00:02<00:00, 29.73it/s] 88%|████████▊ | 89/101 [00:02<00:00, 29.71it/s] 91%|█████████ | 92/101 [00:03<00:00, 29.67it/s] 94%|█████████▍| 95/101 [00:03<00:00, 29.61it/s] 97%|█████████▋| 98/101 [00:03<00:00, 29.62it/s]100%|██████████| 101/101 [00:03<00:00, 30.05it/s]
+Starting fine-tuning...
+/home/asm242/.conda/envs/dnabert2/lib/python3.8/site-packages/huggingface_hub/file_download.py:943: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+WARNING:root:Perform single sequence classification...
+Traceback (most recent call last):
+  File "train.py", line 309, in <module>
+    train()
+  File "train.py", line 248, in train
+    train_dataset = SupervisedDataset(tokenizer=tokenizer, 
+  File "train.py", line 128, in __init__
+    labels = [int(d[1]) for d in data]
+  File "train.py", line 128, in <listcomp>
+    labels = [int(d[1]) for d in data]
+ValueError: invalid literal for int() with base 10: '2.018'
