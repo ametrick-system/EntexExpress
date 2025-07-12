@@ -27,7 +27,6 @@ labels = [0, 1, 2]
 bed["expression_bin"] = pd.cut(bed["tissue_count"], bins=bins, labels=labels, include_lowest=True)
 print(bed["expression_bin"].value_counts(sort=False))
 
-
 # Plot histogram again with bin cutoffs
 plt.figure(figsize=(8, 5))
 plt.hist(bed["tissue_count"], bins=30, edgecolor="black")

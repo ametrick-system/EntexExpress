@@ -1,4 +1,4 @@
 import pandas as pd
 from entex_express.utils import convert_to_csv_input_tpms
 
-convert_to_csv_input_tpms("promoters_brain_substantia_nigra.fa", output_prefix="dnabert2_input", task="regression")
+convert_to_csv_input_tpms("promoters_brain_substantia_nigra.fa", output_prefix="dnabert2_input", task="bins", cutoffs=[0, 1.1, 2.6])
