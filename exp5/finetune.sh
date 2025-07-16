@@ -3,7 +3,7 @@
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="$HOME/EntexExpress/exp4/finetune.log"
+LOGFILE="$HOME/EntexExpress/exp5/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
 # Change for each experiment
