@@ -31,8 +31,8 @@ for _, row in gtf.iterrows():
     transcript_id = row["transcript_id"]
 
     tss = row["Start"] if strand == "+" else row["End"]
-    start = max(0, tss - 1000)
-    end = tss + 1000
+    start = max(0, tss - 1024)
+    end = tss + 1024
 
     promoters.append((chrom, start, end, gene_id, transcript_id, strand))
 
