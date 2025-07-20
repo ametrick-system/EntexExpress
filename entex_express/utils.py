@@ -3,6 +3,48 @@ import pandas as pd
 import random
 import os
 
+def convert_to_csv_input_labels(fasta_file, output_prefix, split_ratio=(0.8, 0.1, 0.1)):
+    """
+    Convert FASTA (with headers containing '|label=0' or '|label=1')
+    into train/dev/test CSVs for DNABERT2 binary classification.
+    """
+    records = []
+    for record in SeqIO.parse(fasta_file, "fasta"):
+        header = record.description
+        if "|label=1" in header:
+            label = 1
+        elif "|label=0" in header:
+            label = 0
+        else:
+            continue  # skip sequences without label in header
+
+        sequence = str(record.seq).upper()
+        if "N" in sequence:
+            continue  # skip ambiguous sequences
+
+        records.append((sequence, label))
+
+    # Shuffle and split
+    random.shuffle(records)
+    total = len(records)
+    n_train = int(split_ratio[0] * total)
+    n_dev = int(split_ratio[1] * total)
+
+    datasets = {
+        "train.csv": records[:n_train],
+        "dev.csv": records[n_train:n_train + n_dev],
+        "test.csv": records[n_train + n_dev:]
+    }
+
+    os.makedirs(output_prefix, exist_ok=True)
+    for name, data in datasets.items():
+        df = pd.DataFrame(data, columns=["sequence", "label"])
+        df.to_csv(f"{output_prefix}/{name}", index=False)
+
+    print(f"✅ Saved {len(records)} total examples to {output_prefix}/")
+    print(pd.Series([r[1] for r in records]).value_counts())
+
+
 def convert_to_csv_input_tpms(fasta_file, output_prefix, task, cutoffs=None, split_ratio=(0.8, 0.1, 0.1)):
     records = []
     for record in SeqIO.parse(fasta_file, "fasta"):
