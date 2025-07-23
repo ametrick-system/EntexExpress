@@ -3,8 +3,8 @@
 **Research Question:** Can DNA sequence alone (specifically from promoter or other cis-regulatory regions) predict whether a gene is expressed in a given tissue — and possibly at what level?
 
 - **Subquestion 1 (Experiments 1-4):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed (i.e., ubiquitous, moderate, tissue-specific) based solely on its promoter sequence?
-- **Subquestion 2 (Experiment 5-6):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed in the Brain_Substantia_Nigra tissue based solely on its promoter sequence?
-- **Subquestion 3 (Experiment 7):** How well can DNABERT2 *with an added regression head* predict the *level of expression* of a protein-coding gene in the Brain_Substantia_Nigra tissue based solely on its promoter sequence?
+- **Subquestion 2 (Experiments 5-6):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed in the Brain_Substantia_Nigra tissue based solely on its promoter sequence?
+- **Subquestion 3 (Experiments 7-8):** How well can DNABERT2 *with an added regression head* predict the *level of expression* of a protein-coding gene in the Brain_Substantia_Nigra tissue based solely on its promoter sequence?
 
 ## Environment Setup (DNABERT-2)
 
