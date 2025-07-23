@@ -51,7 +51,7 @@ class TrainingArguments(transformers.TrainingArguments):
     logging_steps: int = field(default=100)
     save_steps: int = field(default=100)
     eval_steps: int = field(default=100)
-    evaluation_strategy: str = field(default="steps"),
+    evaluation_strategy: str = field(default="steps")
     warmup_steps: int = field(default=50)
     weight_decay: float = field(default=0.01)
     learning_rate: float = field(default=1e-4)
@@ -65,7 +65,7 @@ class TrainingArguments(transformers.TrainingArguments):
     save_model: bool = field(default=False)
     seed: int = field(default=42)
 	######### NEW: ADD TASK PARAMETER FOR REGRESSION CAPABILITIES #############
-	task: str = field(default="classification", metadata={"help": "Task type: 'classification' or 'regression'"})
+    task: str = field(default="classification", metadata={"help": "Task type: 'classification' or 'regression'"})
     
 
 def safe_save_model_for_hf_trainer(trainer: transformers.Trainer, output_dir: str):
@@ -129,20 +129,20 @@ class SupervisedDataset(Dataset):
             # data is in the format of [text, label]
             logging.warning("Perform single sequence classification...")
             texts = [d[0] for d in data]
-			######### NEW: CONVERT TO FLOAT INPUT FOR REGRESSION TASK #############
-			if task == "regression":
-				labels = [float(d[1]) for d in data]
-			else:
-            	labels = [int(d[1]) for d in data]
+            ######### NEW: CONVERT TO FLOAT INPUT FOR REGRESSION TASK #############
+            if task == "regression":
+                labels = [float(d[1]) for d in data]
+            else:
+                labels = [int(d[1]) for d in data]
         elif len(data[0]) == 3:
             # data is in the format of [text1, text2, label]
             logging.warning("Perform sequence-pair classification...")
             texts = [[d[0], d[1]] for d in data]
-			######### NEW: CONVERT TO FLOAT INPUT FOR REGRESSION TASK #############
-			if task == "regression":
-				labels = [float(d[2]) for d in data]
-			else:
-            	labels = [int(d[2]) for d in data]
+            ######### NEW: CONVERT TO FLOAT INPUT FOR REGRESSION TASK #############
+            if task == "regression":
+                labels = [float(d[2]) for d in data]
+            else:
+                labels = [int(d[2]) for d in data]
         else:
             raise ValueError("Data format not supported.")
         
@@ -168,7 +168,7 @@ class SupervisedDataset(Dataset):
         self.input_ids = output["input_ids"]
         self.attention_mask = output["attention_mask"]
         self.labels = labels
-		######### NEW: SET NUM_LABELS TO 1 FOR REGRESSION TASK #############
+        ######### NEW: SET NUM_LABELS TO 1 FOR REGRESSION TASK #############
         self.num_labels = 1 if task == "regression" else len(set(labels))
 
     def __len__(self):
@@ -183,16 +183,16 @@ class DataCollatorForSupervisedDataset(object):
     """Collate examples for supervised fine-tuning."""
 
     tokenizer: transformers.PreTrainedTokenizer
-	######### NEW: FLAG TO CONTROL INT VS FLOAT LABELS #############
-	regression: bool = False
+    ######### NEW: FLAG TO CONTROL INT VS FLOAT LABELS #############
+    regression: bool = False
 
     def __call__(self, instances: Sequence[Dict]) -> Dict[str, torch.Tensor]:
         input_ids, labels = tuple([instance[key] for instance in instances] for key in ("input_ids", "labels"))
         input_ids = torch.nn.utils.rnn.pad_sequence(
             input_ids, batch_first=True, padding_value=self.tokenizer.pad_token_id
         )
-		######### NEW: SET LABEL DATA TYPE BASED ON FLAG #############
-		dtype = torch.float if self.regression else torch.long
+        ######### NEW: SET LABEL DATA TYPE BASED ON FLAG #############
+        dtype = torch.float if self.regression else torch.long
         labels = torch.tensor(labels, dtype=dtype)
         return dict(
             input_ids=input_ids,
@@ -240,13 +240,13 @@ Compute metrics used for huggingface trainer.
 """ 
 def compute_metrics(eval_pred):
     predictions, labels = eval_pred
-	######### NEW: REGRESSION METRICS #############
+    ######### NEW: REGRESSION METRICS #############
     if predictions.ndim > 1 and predictions.shape[1] == 1:
         predictions = predictions.squeeze()
     if labels.ndim > 1 and labels.shape[1] == 1:
         labels = labels.squeeze()
 
-	# Assume regression if labels are floats
+    # Assume regression if labels are floats
     if labels.dtype in [np.float32, np.float64]:
         mse = sklearn.metrics.mean_squared_error(labels, predictions)
         r2 = sklearn.metrics.r2_score(labels, predictions)
@@ -273,7 +273,7 @@ def train():
         tokenizer.eos_token = tokenizer.pad_token
 
     # define datasets and data collator
-	############### NEW: PASS IN TRAINING TASK INFO ####################
+    ############### NEW: PASS IN TRAINING TASK INFO ####################
     train_dataset = SupervisedDataset(tokenizer=tokenizer, 
                                       data_path=os.path.join(data_args.data_path, "train.csv"), 
                                       kmer=data_args.kmer, task=training_args.task)
@@ -290,7 +290,7 @@ def train():
     model = transformers.AutoModelForSequenceClassification.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=training_args.cache_dir,
-		################# NEW: SET NUM_LABELS = 1 FOR REGRESSION ######################
+        ################# NEW: SET NUM_LABELS = 1 FOR REGRESSION ######################
         num_labels=1 if training_args.task == "regression" else train_dataset.num_labels,
         trust_remote_code=True,
     )
