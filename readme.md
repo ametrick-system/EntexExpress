@@ -5,6 +5,7 @@
 - **Subquestion 1 (Experiments 1-4):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed (i.e., ubiquitous, moderate, tissue-specific) based solely on its promoter sequence?
 - **Subquestion 2 (Experiments 5-6):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed in the Brain_Substantia_Nigra tissue based solely on its promoter sequence?
 - **Subquestion 3 (Experiments 7-8):** How well can DNABERT2 *with an added regression head* predict the *level of expression* of a protein-coding gene in the Brain_Substantia_Nigra tissue based solely on its promoter sequence?
+- **Subquestion 4 (Experiment 9):** How can can DNABERT2-regression predict the *level of expression* of a protein-coding gene that is *tissue-specific* to the Heart_Left_Ventricle tissue based solely on its promoter sequence?
 
 ## Environment Setup (DNABERT-2)
 
