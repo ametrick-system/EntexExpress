@@ -1,17 +1,19 @@
 #!/bin/bash
 
+module load miniconda
+conda activate dnabert2
+
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
 LOGFILE="$HOME/EntexExpress/exp6/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
-# Change for each experiment
 export DATA_PATH=~/EntexExpress/exp6/input
 export OUTPUT_PATH=~/EntexExpress/exp6/output
 export RUN_NAME=entex_express_exp6
 
-export MAX_LENGTH=512 # set to 0.25 * your sequence length (2048)
+export MAX_LENGTH=512 # 0.25 * (sequence length = 2048)
 export LR=3e-5
 
 echo "Starting fine-tuning..."
