@@ -12,7 +12,7 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
     # -----------------------------
     # (1) Load GTF
     # -----------------------------
-    gtf_url = 'https://storage.googleapis.com/alphagenome/reference/gencode/hg38/   gencode.v46.annotation.gtf.gz.feather'
+    gtf_url = 'https://storage.googleapis.com/alphagenome/reference/gencode/hg38/gencode.v46.annotation.gtf.gz.feather'
     gtf_path = 'gencode.v46.annotation.gtf.feather'
     if not os.path.exists(gtf_path):
         print("Downloading GTF...")
@@ -119,20 +119,21 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
     merged = pd.concat([positives, negatives_balanced], ignore_index=True)
     merged = merged.sample(frac=1)
 
+    # Add log(TPM)
+    merged["log_tpm"] = np.log(merged[tissue] + 1)
+
     # -----------------------------
     # (7) Format output BED
     # -----------------------------
     merged["name"] = (
         merged["gene_id"]
         + "|TPM=" + merged[tissue].round(3).astype(str)
+        + "|log(TPM)=" + merged["log_tpm"].round(3).astype(str)
         + "|OtherMedian=" + merged["Other_Median_TPM"].round(3).astype(str)
         + "|TissueSpecific=" + merged["Tissue_Specific"].astype(str)
     )
 
-    bed_df_final = merged[["chr", "start", "end", "name", tissue, "Other_Median_TPM", "strand"]]
-
-	# Add log(TPM)
-    bed_df_final["log_tpm"] = np.log(bed_df_final[tissue] + 1)
+    bed_df_final = merged[["chr", "start", "end", "name", tissue, "log_tpm","Other_Median_TPM", "strand"]]
 
     bed_df_final.to_csv(output_bed, sep="\t", header=False, index=False)
 
@@ -168,7 +169,7 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, int_regression=Fa
             if found == False:
                 label = len(cutoffs)-1
         elif task == "regression":
-            label = value
+            label = float(value)
         else:
             raise ValueError("Parameter 'task' must be 'bins' or 'regression'")
 
@@ -176,7 +177,7 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, int_regression=Fa
         if "N" in sequence:
             continue  # skip ambiguous sequences
 
-        records.append((sequence, int(label) if int_regression else label))
+        records.append((sequence, int(label) if int_regression == True else float(label)))
 
     # Shuffle and split into input CSVs
     random.shuffle(records)
