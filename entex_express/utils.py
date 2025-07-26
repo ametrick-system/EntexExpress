@@ -1,5 +1,6 @@
 from Bio import SeqIO
 import pandas as pd
+import numpy as np
 import random
 import os
 
@@ -129,13 +130,17 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
     )
 
     bed_df_final = merged[["chr", "start", "end", "name", tissue, "Other_Median_TPM", "strand"]]
+
+	# Add log(TPM)
+    bed_df_final["log_tpm"] = np.log(bed_df_final[tissue] + 1)
+
     bed_df_final.to_csv(output_bed, sep="\t", header=False, index=False)
 
     print(f"BED file saved: {output_bed}")
     print(f"Total promoters: {len(merged)}")
     print(f"Tissue-specific promoters: {merged['Tissue_Specific'].sum()}")
 
-def config_dnabert2_input(fasta, label_key, save_prefix, task, cutoffs=None, split_ratio=(0.8, 0.1, 0.1)):
+def config_dnabert2_input(fasta, label_key, save_prefix, task, int_regression=False, cutoffs=None, split_ratio=(0.8, 0.1, 0.1)):
     '''
     Function to convert FASTA (with headers containing '|{label_key}={val}') 
     into train/dev/test CSVs for DNABERT2 finetuning
@@ -148,7 +153,7 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, cutoffs=None, spl
         # Extract value of input label parameter
         for part in header.split("::")[0].split("|"):
             if part.startswith(f"{label_key}="):
-                value = (float)(part.split("=")[1])
+                value = float(part.split("=")[1])
 
         if value is None:
             raise ValueError("Parameter 'label_key' must be in the input FASTA header as |label_key=value|")
@@ -171,7 +176,7 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, cutoffs=None, spl
         if "N" in sequence:
             continue  # skip ambiguous sequences
 
-        records.append((sequence, label))
+        records.append((sequence, int(label) if int_regression else label))
 
     # Shuffle and split into input CSVs
     random.shuffle(records)
