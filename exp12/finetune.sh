@@ -39,6 +39,5 @@ python3 train.py \
     --logging_steps 100 \
     --overwrite_output_dir True \
     --log_level info \
-    --find_unused_parameters False \
-	--task regression
+    --find_unused_parameters False
 
