@@ -6,12 +6,12 @@ conda activate dnabert2
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="$HOME/EntexExpress/exp10/finetune.log"
+LOGFILE="$HOME/EntexExpress/exp11/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
-export DATA_PATH=~/EntexExpress/exp10/input
-export OUTPUT_PATH=~/EntexExpress/exp10/output
-export RUN_NAME=entex_express_exp10
+export DATA_PATH=~/EntexExpress/exp11/input
+export OUTPUT_PATH=~/EntexExpress/exp11/output
+export RUN_NAME=entex_express_exp11
 
 export MAX_LENGTH=512 # 0.25 * (sequence length = 2048)
 export LR=1e-5
@@ -29,7 +29,7 @@ python3 train_regression.py \
     --per_device_eval_batch_size 16 \
     --gradient_accumulation_steps 1 \
     --learning_rate ${LR} \
-    --num_train_epochs 20 \
+    --num_train_epochs 10 \
     --fp16 \
     --save_steps 200 \
     --output_dir ${OUTPUT_PATH} \

@@ -130,10 +130,11 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
         + "|TPM=" + merged[tissue].round(3).astype(str)
         + "|log(TPM)=" + merged["log_tpm"].round(3).astype(str)
         + "|OtherMedian=" + merged["Other_Median_TPM"].round(3).astype(str)
+        + "|SpecificityRatio=" + merged["Specificity_Ratio"].round(3).astype(str)
         + "|TissueSpecific=" + merged["Tissue_Specific"].astype(str)
     )
 
-    bed_df_final = merged[["chr", "start", "end", "name", tissue, "log_tpm","Other_Median_TPM", "strand"]]
+    bed_df_final = merged[["chr", "start", "end", "name", tissue, "log_tpm","Other_Median_TPM", "Specificity_Ratio", "strand"]]
 
     bed_df_final.to_csv(output_bed, sep="\t", header=False, index=False)
 
