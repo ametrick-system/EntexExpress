@@ -19,7 +19,7 @@ export LR=3e-5
 echo "Starting fine-tuning..."
 
 # Training use DataParallel
-python3 train_regression.py \
+python3 train.py \
     --model_name_or_path zhihan1996/DNABERT-2-117M \
     --data_path  ${DATA_PATH} \
     --kmer -1 \
