@@ -160,7 +160,7 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, int_regression=Fa
         if value is None:
             raise ValueError("Parameter 'label_key' must be in the input FASTA header as |label_key=value|")
 
-        if task == "bins": # cutoffs[i] stores the lowest value of the i-th bin
+        if task == "classification": # cutoffs[i] stores the lowest value of the i-th bin
             found = False
             for i in range(len(cutoffs)-1):
                 if value >= cutoffs[i] and value < cutoffs[i+1]:
@@ -172,13 +172,13 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, int_regression=Fa
         elif task == "regression":
             label = float(value)
         else:
-            raise ValueError("Parameter 'task' must be 'bins' or 'regression'")
+            raise ValueError("Parameter 'task' must be 'classification' or 'regression'")
 
         sequence = str(record.seq).upper()
         if "N" in sequence:
             continue  # skip ambiguous sequences
 
-        records.append((sequence, int(label) if int_regression == True else float(label)))
+        records.append((sequence, float(label) if (int_regression == False and task == "regression") else int(label)))
 
     # Shuffle and split into input CSVs
     random.shuffle(records)
