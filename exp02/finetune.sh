@@ -3,15 +3,15 @@
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="~/EntexExpress/exp2/finetune.log"
+LOGFILE="~/EntexExpress/exp02/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
-# Change for each experiment
-export DATA_PATH=~/EntexExpress/exp2/input
-export OUTPUT_PATH=~/EntexExpress/exp2/output
-export RUN_NAME=DNABERT2_exp2_promoters
+# CONFIG
+export DATA_PATH=~/EntexExpress/exp02/input
+export OUTPUT_PATH=~/EntexExpress/exp02/output
+export RUN_NAME=DNABERT2_exp02_promoters
 
-export MAX_LENGTH=300 # set to 0.25 * your sequence length (1200)
+export MAX_LENGTH=300 # 0.25 * (sequence length = 1200)
 export LR=3e-5
 
 echo "Starting fine-tuning..."

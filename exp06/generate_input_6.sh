@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Write terminal output to log file
-LOGFILE="$HOME/EntexExpress/exp6/generate_input_6.log"
+LOGFILE="$HOME/EntexExpress/exp06/generate_input_6.log"
 exec &> >(tee -a "$LOGFILE")
 
 export RUN_TISSUE="Brain_Substantia_nigra"

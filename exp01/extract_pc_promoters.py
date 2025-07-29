@@ -6,12 +6,14 @@ Script to extract the TSS and promoter region for each protein-coding gene in pc
     - The genomic coordinate where transcription begins
     - For + strand genes: TSS = start coordinate of gene
     - For - strand genes: TSS = end coordinate of gene
-- Promoter region: 
-    - For + strand: TSS - 1000 to TSS + 200
-    - For - strand: TSS - 200 to TSS + 1000
 '''
 
 import pandas as pd
+import numpy as np
+
+# Choosing 2048 bp surrounding TSS to look at for promoter + some downstream elements
+upbp = 1024
+downbp = 1024
 
 # Load pc.txt
 pc = pd.read_csv("../entex_data/expressed_gene.tissue_specificity/pc.txt", sep="\t", header=None, names=["gene", "num_tissues"])
@@ -41,14 +43,9 @@ print(f"# genes matched: {len(pc_genes)}")
 
 # Compute promoter region (returns new columns only)
 def compute_promoter(row):
-    if row["strand"] == "+":
-        tss = row["start"]
-        start = max(tss - 1000, 0)
-        end = tss + 200
-    else:
-        tss = row["end"]
-        start = max(tss - 200, 0)
-        end = tss + 1000
+    tss = row["start"] if row["strand"] == "+" else row["end"]
+    start = max(0, tss - downbp)
+    end = tss + upbp
     return pd.Series({
         "chr": row["chr"],
         "start": start,
@@ -60,6 +57,8 @@ def compute_promoter(row):
     })
 
 promoters = pc_genes.apply(compute_promoter, axis=1)
+
+promoters["label"] = np.where(promoters["num_tissues"] > 20, 0, 1) # 1 = tissue-specific
 
 # Save BED file
 promoters.to_csv("promoters.bed", sep="\t", header=False, index=False)

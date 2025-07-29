@@ -3,11 +3,11 @@
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="~/EntexExpress/exp2/finetune.log"
+LOGFILE="~/EntexExpress/exp01/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
-export DATA_PATH=~/EntexExpress/exp1/input
-export MAX_LENGTH=300 # set to 0.25 * your sequence length (1200)
+export DATA_PATH=~/EntexExpress/exp01/input
+export MAX_LENGTH=300 # 0.25 * (sequence length = 1200)
 export LR=3e-5
 
 echo "Starting fine-tuning..."

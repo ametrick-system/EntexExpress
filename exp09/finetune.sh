@@ -6,12 +6,13 @@ conda activate dnabert2
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="$HOME/EntexExpress/exp9/finetune.log"
+LOGFILE="$HOME/EntexExpress/exp09/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
-export DATA_PATH=~/EntexExpress/exp9/input
-export OUTPUT_PATH=~/EntexExpress/exp9/output
-export RUN_NAME=entex_express_exp9
+# CONFIG
+export DATA_PATH=~/EntexExpress/exp09/input
+export OUTPUT_PATH=~/EntexExpress/exp09/output
+export RUN_NAME=entex_express_exp09
 
 export MAX_LENGTH=512 # 0.25 * (sequence length = 2048)
 export LR=3e-5
