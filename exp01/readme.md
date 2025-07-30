@@ -1,5 +1,10 @@
 # Experiment 1
 
+Saved 16000 total examples with label key label to input/
+0    9945
+1    6055
+
+
 ## Summary
 **Research Question:** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed (i.e., active in many tissues) based solely on its promoter sequence?
 

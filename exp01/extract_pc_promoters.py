@@ -59,7 +59,18 @@ def compute_promoter(row):
 promoters = pc_genes.apply(compute_promoter, axis=1)
 
 promoters["label"] = np.where(promoters["num_tissues"] > 20, 0, 1) # 1 = tissue-specific
+promoters["name"] = (
+        promoters["gene_id"]
+        + "|chr=" + promoters["chr"]
+        + "|gene_id=" + promoters["gene_id"]
+        + "|gene_name=" + promoters["gene_name"]
+        + "|strand=" + promoters["strand"]
+        + "|num_tissues=" + promoters["num_tissues"].astype(str)
+        + "|label=" + promoters["label"].astype(str)
+    )
 
-# Save BED file
-promoters.to_csv("promoters.bed", sep="\t", header=False, index=False)
+
+# Order columns correctly for bedtools and save BED file
+bed_cols = ["chr", "start", "end", "name", "gene_name", "strand", "num_tissues", "label"]
+promoters[bed_cols].to_csv("promoters.bed", sep="\t", header=False, index=False)
 print(f"Wrote {len(promoters)} promoter regions with expression metadata to promoters.bed")

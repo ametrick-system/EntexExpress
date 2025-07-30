@@ -1,13 +1,20 @@
 #!/bin/bash
 
+module load miniconda
+conda activate dnabert2
+
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="~/EntexExpress/exp01/finetune.log"
+LOGFILE="$HOME/EntexExpress/exp01/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
+# CONFIG
 export DATA_PATH=~/EntexExpress/exp01/input
-export MAX_LENGTH=300 # 0.25 * (sequence length = 1200)
+export OUTPUT_PATH=~/EntexExpress/exp01/output
+export RUN_NAME=entex_express_exp01
+
+export MAX_LENGTH=512 # 0.25 * (sequence length = 2048)
 export LR=3e-5
 
 echo "Starting fine-tuning..."
@@ -17,7 +24,7 @@ python3 train.py \
     --model_name_or_path zhihan1996/DNABERT-2-117M \
     --data_path  ${DATA_PATH} \
     --kmer -1 \
-    --run_name DNABERT2_exp1_promoters \
+    --run_name ${RUN_NAME} \
     --model_max_length ${MAX_LENGTH} \
     --per_device_train_batch_size 8 \
     --per_device_eval_batch_size 16 \
@@ -26,7 +33,7 @@ python3 train.py \
     --num_train_epochs 5 \
     --fp16 \
     --save_steps 200 \
-    --output_dir ~/EntexExpress/exp1/output \
+    --output_dir ${OUTPUT_PATH} \
     --evaluation_strategy steps \
     --eval_steps 200 \
     --warmup_steps 50 \
