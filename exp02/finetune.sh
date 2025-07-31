@@ -3,13 +3,13 @@
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="~/EntexExpress/exp02/finetune.log"
+LOGFILE="$HOME/EntexExpress/exp03/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
 # CONFIG
-export DATA_PATH=~/EntexExpress/exp02/input
-export OUTPUT_PATH=~/EntexExpress/exp02/output
-export RUN_NAME=DNABERT2_exp02_promoters
+export DATA_PATH=~/EntexExpress/exp03/input
+export OUTPUT_PATH=~/EntexExpress/exp03/output
+export RUN_NAME=DNABERT2_exp03_promoters
 
 export MAX_LENGTH=300 # 0.25 * (sequence length = 1200)
 export LR=3e-5
@@ -38,7 +38,7 @@ python3 train.py \
     --overwrite_output_dir True \
     --log_level info \
     --find_unused_parameters False
-    
+
 # Training use DistributedDataParallel (more efficient)
 # export num_gpu=4 # please change the value based on your setup
 
