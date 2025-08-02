@@ -1,0 +1,81 @@
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+Generating BED file...
+  File "<string>", line 5
+    assay='TF-ChIP-seq_CTCF'
+          ^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+Generating FASTA file...
+Error: The requested file (hetSNVs_{thoracic_aorta}_{TF-ChIP-seq_CTCF}.bed) could not be opened. Error message: (No such file or directory). Exiting!
+Visualizing the data...
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+  File "/vast/palmer/home.mccleary/asm242/EntexExpress/entex_express/visualizations.py", line 7, in plot_histogram_from_bed
+    raise FileNotFoundError(f"Cannot find {bed_path}")
+FileNotFoundError: Cannot find hetSNVs_{thoracic_aorta}_{TF-ChIP-seq_CTCF}.bed
+Generating DNABERT2 input CSVs...
+  File "<string>", line 4
+    fasta=hetSNVs_{thoracic_aorta}_{TF-ChIP-seq_CTCF}.fa',
+                                                        ^
+SyntaxError: unterminated string literal (detected at line 4)
+Generated DNABERT2 input successfully!
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+Generating BED file...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+  File "/vast/palmer/home.mccleary/asm242/EntexExpress/entex_express/utils.py", line 47, in generate_het_snvs_bed
+    writer.writerow(make_bed_entry(row))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/vast/palmer/home.mccleary/asm242/EntexExpress/entex_express/utils.py", line 23, in make_bed_entry
+    + "|SNV_pos=" + snv_pos.astype(str)
+    ^^^^^^^^^^^^^
+TypeError: bad operand type for unary +: 'str'
+Generating FASTA file...
+Visualizing the data...
+thoracic_aorta_TF-ChIP-seq_CTCF_histogram.png.png saved in .
+Generating DNABERT2 input CSVs...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Saved 0 total examples with label key ref_allele_ratio to input/
+Series([], Name: count, dtype: int64)
+Generated DNABERT2 input successfully!
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+Generating BED file...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Successfully saved hetSNVs_thoracic_aorta_TF-ChIP-seq_CTCF.bed with 52426 rows
+Generating FASTA file...
+Visualizing the data...
+thoracic_aorta_TF-ChIP-seq_CTCF_histogram.png saved in .
+Generating DNABERT2 input CSVs...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Saved 52408 total examples with label key ref_allele_ratio to input/
+0.500000    6331
+0.555556    2552
+0.444444    2512
+0.666667    2432
+0.333333    2357
+            ... 
+0.470395       1
+0.603960       1
+0.482051       1
+0.536481       1
+0.592105       1
+Name: count, Length: 2213, dtype: int64
+Generated DNABERT2 input successfully!

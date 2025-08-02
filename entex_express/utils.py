@@ -3,9 +3,53 @@ import pandas as pd
 import numpy as np
 import random
 import os
+import csv
 
 from alphagenome.data import gene_annotation
 from alphagenome.data import transcript as transcript_utils
+
+''' function to convert a tsv row to a BED entry'''
+def make_bed_entry(row, window=2048):
+    chrom = row["chr"]
+    snv_pos = int(row["ref_start"])
+    half = window // 2
+    start = snv_pos - half
+    end = snv_pos + half + 1  # BED is half-open [start, end)
+
+    # Parse score, or return None to skip
+    try:
+        ratio = float(row['ref_allele_ratio'])
+        name = (
+            f"|chr={chrom}"
+            f"|SNV_pos={str(snv_pos)}"
+            f"|ref_allele_ratio={str(ratio)}"
+        )
+    except (ValueError, KeyError):
+        return None
+
+    return (chrom, start, end, name, ratio)
+
+def generate_het_snvs_bed(tissue, assay, output_bed, window):
+    tsv_file = os.path.expanduser("~/LargeFiles/hetSNVs.tsv")
+    rows = []
+
+    # open file and search
+    with open(tsv_file, newline='') as file:
+        reader = csv.DictReader(file, delimiter='\t')
+        for row in reader:
+            # check if this row is a positive or negative training example, add to lists accordingly
+            if row["assay"] == assay and row["tissue"] == tissue:
+                rows.append(row)
+
+    # make BED file with these rows
+    written = 0
+    with open(output_bed, "w", newline='') as bed:
+        writer = csv.writer(bed, delimiter='\t')
+        for row in rows:
+            writer.writerow(make_bed_entry(row))
+            written += 1
+
+    print(f"Successfully saved {output_bed} with {written} rows")
 
 # Binary Tissue Specific/Not, with equal 1s and 0s
 def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff, tpm_floor):
