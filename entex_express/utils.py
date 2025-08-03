@@ -51,8 +51,9 @@ def generate_het_snvs_bed(tissue, assay, output_bed, window):
 
     print(f"Successfully saved {output_bed} with {written} rows")
 
-# Binary Tissue Specific/Not, with equal 1s and 0s
-def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff, tpm_floor):
+# Includes column of binary tissue specific/not, with equal 1s and 0s unless all_genes=True
+# If all_genes=True, does not downsize the negatives (0s)
+def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff, tpm_floor, all_genes=False):
     # -----------------------------
     # (1) Load GTF
     # -----------------------------
@@ -91,12 +92,10 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
     )
     promoters_df["gene_id"] = promoters_df["gene_id"].str.replace(r"\.\d+", "", regex=True)
     promoters_df = promoters_df.drop_duplicates(subset="gene_id", keep="first")
-
     
     # -----------------------------------------------
     # (3) Load GTEx & compute other tissue median TPM
     # -----------------------------------------------
-
     gtex_expr_path = "~/LargeFiles/GTEx_Analysis_v10_RNASeQCv2.4.2_gene_median_tpm.gct"
     gtex_df = pd.read_csv(os.path.expanduser(gtex_expr_path), sep='\t', skiprows=2)
 
@@ -114,7 +113,6 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
     # -----------------------------
     # (4) Merge with promoters
     # -----------------------------
-
     merged = promoters_df.merge(
         gtex_df[["gene_id", tissue, "Other_Median_TPM"]],
         on="gene_id",
@@ -124,7 +122,6 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
     # -----------------------------
     # (5) Classify tissue-specific
     # -----------------------------
-
     merged["Specificity_Ratio"] = merged[tissue] / (merged["Other_Median_TPM"] + 1e-3)
     
     merged["Tissue_Specific"] = (
@@ -132,36 +129,37 @@ def generate_tissue_specific_bed(tissue, output_bed, downbp, upbp, ratio_cutoff,
         (merged[tissue] >= tpm_floor)
     ).astype(int)
 
-    # ------------------------------------
-    # (6) Pick negatives (most ubiquitous)
-    # ------------------------------------
+    # ------------------------------------------------------------------
+    # (6) Pick negatives (most ubiquitous) if want balanced binary input
+    # ------------------------------------------------------------------
+    if not all_genes:
+        specificity_file = "~/EntexExpress/entex_data/expressed_gene.tissue_specificity/pc.txt"
 
-    specificity_file = "~/EntexExpress/entex_data/expressed_gene.tissue_specificity/pc.txt"
+        spec_df = pd.read_csv(
+            os.path.expanduser(specificity_file),
+            sep="\t",
+            header=None,
+            names=["gene_raw", "Num_Tissues"]
+        )
 
-    spec_df = pd.read_csv(
-        os.path.expanduser(specificity_file),
-        sep="\t",
-        header=None,
-        names=["gene_raw", "Num_Tissues"]
-    )
+        # Clean gene_id (strip version, match promoters)
+        spec_df["gene_id"] = spec_df["gene_raw"].str.split("|").str[0].str.replace(r"\.\d+", "", regex=True)
 
-    # Clean gene_id (strip version, match promoters)
-    spec_df["gene_id"] = spec_df["gene_raw"].str.split("|").str[0].str.replace(r"\.\d+", "", regex=True)
+        # Merge with our dataset
+        merged = merged.merge(spec_df[["gene_id", "Num_Tissues"]], on="gene_id", how="left")
 
-    # Merge with our dataset
-    merged = merged.merge(spec_df[["gene_id", "Num_Tissues"]], on="gene_id", how="left")
+        # Separate positives and negatives
+        positives = merged[merged["Tissue_Specific"] == 1]
+        negatives = merged[merged["Tissue_Specific"] == 0]
 
-    # Separate positives and negatives
-    positives = merged[merged["Tissue_Specific"] == 1]
-    negatives = merged[merged["Tissue_Specific"] == 0]
+        # Pick the most ubiquitous negatives (highest Num_Tissues)
+        negatives_sorted = negatives.sort_values("Num_Tissues", ascending=False)
+        negatives_balanced = negatives_sorted.head(len(positives))
 
-    # Pick the most ubiquitous negatives (highest Num_Tissues)
-    negatives_sorted = negatives.sort_values("Num_Tissues", ascending=False)
-    negatives_balanced = negatives_sorted.head(len(positives))
-
-    # Combine back and shuffle
-    merged = pd.concat([positives, negatives_balanced], ignore_index=True)
-    merged = merged.sample(frac=1)
+        # Combine back and shuffle
+        merged = pd.concat([positives, negatives_balanced], ignore_index=True)
+        merged = merged.sample(frac=1)
+ 
 
     # Add log(TPM)
     merged["log_tpm"] = np.log(merged[tissue] + 1)

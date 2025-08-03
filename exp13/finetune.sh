@@ -6,7 +6,7 @@ conda activate dnabert2
 cd ~/DNABERT_2/finetune
 
 # Write terminal output to log file
-LOGFILE="$HOME/EntexExpress/exp10/finetune.log"
+LOGFILE="$HOME/EntexExpress/exp13/finetune.log"
 exec &> >(tee -a "$LOGFILE")
 
 export DATA_PATH=~/EntexExpress/exp13/input
