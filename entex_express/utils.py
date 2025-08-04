@@ -1,3 +1,5 @@
+# Must be run while in alphagenome-env conda virtual environment
+
 from Bio import SeqIO
 import pandas as pd
 import numpy as np

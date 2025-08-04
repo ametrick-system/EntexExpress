@@ -1,0 +1,66 @@
+{
+  "best_metric": 1.0666688680648804,
+  "best_model_checkpoint": "/home/asm242/EntexExpress/exp12/output/checkpoint-400",
+  "epoch": 2.73972602739726,
+  "global_step": 400,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.68,
+      "learning_rate": 2.7926470588235297e-05,
+      "loss": 1.2853,
+      "step": 100
+    },
+    {
+      "epoch": 1.37,
+      "learning_rate": 2.351470588235294e-05,
+      "loss": 1.2118,
+      "step": 200
+    },
+    {
+      "epoch": 1.37,
+      "eval_accuracy": 0.496551724137931,
+      "eval_f1": 0.32454710988340213,
+      "eval_loss": 1.217020869255066,
+      "eval_matthews_correlation": 0.32993814283383693,
+      "eval_precision": 0.33412821650399294,
+      "eval_recall": 0.40615384615384614,
+      "eval_runtime": 0.3245,
+      "eval_samples_per_second": 446.829,
+      "eval_steps_per_second": 30.816,
+      "step": 200
+    },
+    {
+      "epoch": 2.05,
+      "learning_rate": 1.910294117647059e-05,
+      "loss": 1.1799,
+      "step": 300
+    },
+    {
+      "epoch": 2.74,
+      "learning_rate": 1.4735294117647059e-05,
+      "loss": 1.143,
+      "step": 400
+    },
+    {
+      "epoch": 2.74,
+      "eval_accuracy": 0.5586206896551724,
+      "eval_f1": 0.34606798214028517,
+      "eval_loss": 1.0666688680648804,
+      "eval_matthews_correlation": 0.4317988077064417,
+      "eval_precision": 0.2997049247049247,
+      "eval_recall": 0.4471153846153846,
+      "eval_runtime": 0.3165,
+      "eval_samples_per_second": 458.198,
+      "eval_steps_per_second": 31.6,
+      "step": 400
+    }
+  ],
+  "max_steps": 730,
+  "num_train_epochs": 5,
+  "total_flos": 1001777875076160.0,
+  "trial_name": null,
+  "trial_params": null
+}

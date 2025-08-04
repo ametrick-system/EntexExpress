@@ -1,10 +1,72 @@
+# Must be run while in dnabert2 conda virtual environment
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import torch
 import numpy as np
+from sklearn.metrics import roc_curve, auc
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer
 from .dnabert2_train_regression import SupervisedDataset, DataCollatorForSupervisedDataset
+
+# For binary classification tasks
+def plot_roc_curve(checkpoint_path, data_path):
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint_path, trust_remote_code=True)
+    model = AutoModelForSequenceClassification.from_pretrained(checkpoint_path, trust_remote_code=True)
+
+    test_dataset = SupervisedDataset(
+        data_path=f"{data_path}/test.csv",
+        tokenizer=tokenizer,
+        kmer=-1,
+        task="classification"
+    )
+
+    data_collator = DataCollatorForSupervisedDataset(
+        tokenizer=tokenizer,
+        regression=False
+    )
+
+    # Make predictions
+    trainer = Trainer(model=model, tokenizer=tokenizer, data_collator=data_collator)
+    predictions_output = trainer.predict(test_dataset)
+
+    logits = predictions_output[0] if isinstance(predictions_output, tuple) else predictions_output.predictions
+    if isinstance(logits, tuple):
+        logits = logits[0]
+
+    # Convert to numpy array
+    if isinstance(logits, list):
+        logits = np.stack([np.array(x) for x in logits])
+    else:
+        logits = np.array(logits)
+
+    if logits.ndim != 2 or logits.shape[1] != 2:
+        raise ValueError(f"Expected logits to be shape (N, 2), got shape {logits.shape}")
+
+    # Softmax
+    exps = np.exp(logits - np.max(logits, axis=1, keepdims=True))  # stability
+    probs = exps / np.sum(exps, axis=1, keepdims=True)
+    positive_probs = probs[:, 1]
+
+    labels = np.array(test_dataset.labels)
+
+    # ROC & AUROC
+    fpr, tpr, _ = roc_curve(labels, positive_probs)
+    roc_auc = auc(fpr, tpr)
+
+    # Plot
+    plt.figure(figsize=(6, 6))
+    plt.plot(fpr, tpr, label=f"AUROC = {roc_auc:.3f}", color="blue")
+    plt.plot([0, 1], [0, 1], "k--")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title("ROC Curve")
+    plt.legend(loc="lower right")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig("roc_curve.png", dpi=300)
+    print("Saved ROC curve as roc_curve.png")
+
 
 def plot_regression_results_scatter(checkpoint_path, data_path):
     tokenizer = AutoTokenizer.from_pretrained(checkpoint_path, trust_remote_code=True)

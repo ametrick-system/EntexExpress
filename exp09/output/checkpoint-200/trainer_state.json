@@ -1,0 +1,41 @@
+{
+  "best_metric": 0.6063093543052673,
+  "best_model_checkpoint": "/home/asm242/EntexExpress/exp9/output/checkpoint-200",
+  "epoch": 1.36986301369863,
+  "global_step": 200,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.68,
+      "learning_rate": 2.783823529411765e-05,
+      "loss": 0.5897,
+      "step": 100
+    },
+    {
+      "epoch": 1.37,
+      "learning_rate": 2.3470588235294117e-05,
+      "loss": 0.5076,
+      "step": 200
+    },
+    {
+      "epoch": 1.37,
+      "eval_accuracy": 0.7586206896551724,
+      "eval_f1": 0.7506019951840386,
+      "eval_loss": 0.6063093543052673,
+      "eval_matthews_correlation": 0.5289635914039384,
+      "eval_precision": 0.7778947368421052,
+      "eval_recall": 0.7517162471395882,
+      "eval_runtime": 0.5562,
+      "eval_samples_per_second": 260.682,
+      "eval_steps_per_second": 17.978,
+      "step": 200
+    }
+  ],
+  "max_steps": 730,
+  "num_train_epochs": 5,
+  "total_flos": 500882175444240.0,
+  "trial_name": null,
+  "trial_params": null
+}
