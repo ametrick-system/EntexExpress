@@ -2,6 +2,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import os
 import torch
 import numpy as np
@@ -135,13 +136,15 @@ def plot_histogram_from_bed(save_path, bed_path, bed_cols, plot_col, fig_name, b
     # Also plot histogram with bin cutoffs marked, if given
     if bins_list is not None:
         bed["bin"] = pd.cut(bed[plot_col], bins=bins_list, labels=labels, include_lowest=True)
-        print(bed["bin"].value_counts(sort=False))
 
         plt.figure(figsize=(8, 5))
         plt.hist(bed[plot_col], bins=30, edgecolor="black")
 
-        for bin_x in bins_list:
-            plt.axvline(x=bin_x, color='red', linestyle='--')
+        colors = list(mcolors.CSS4_COLORS.keys())
+
+        for i in range(1,len(bins_list)):
+            bin_x = bins_list[i]
+            plt.axvline(x=bin_x, color=colors[i % len(colors)], linestyle='--', label=labels[i-1])
        
         plt.title(f"Distribution of {plot_col} with Bins")
         plt.xlabel(f"{plot_col}")
@@ -149,7 +152,7 @@ def plot_histogram_from_bed(save_path, bed_path, bed_cols, plot_col, fig_name, b
         plt.legend()
         plt.grid(True)
         plt.tight_layout()
-        plt.savefig("{fig_name}_with_bins.png")
+        plt.savefig(f"{fig_name}_with_bins.png")
         plt.close()
 
         print(f"{fig_name}_with_bins.png saved in {save_path}")

@@ -1,0 +1,32 @@
+Visualizing the data...
+Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+  File "/vast/palmer/home.mccleary/asm242/EntexExpress/entex_express/visualizations.py", line 144, in plot_histogram_from_bed
+    plt.axvline(x=bin_x, color=colors[i % len(colors)], linestyle='--', label=labels[i-1])
+NameError: name 'colors' is not defined
+num_tissues_histogram.png saved in .
+Generating DNABERT2 input CSVs...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Saved 16000 total examples with label key num_tissues to input/
+2    6680
+0    5183
+1    4137
+Name: count, dtype: int64
+Generated DNABERT2 input successfully!
+Visualizing the data...
+num_tissues_histogram.png saved in .
+num_tissues_histogram_with_bins.png saved in .
+Generating DNABERT2 input CSVs...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Saved 16000 total examples with label key num_tissues to input/
+2    6680
+0    5183
+1    4137
+Name: count, dtype: int64
+Generated DNABERT2 input successfully!
