@@ -245,19 +245,11 @@ def config_dnabert2_input(fasta, label_key, save_prefix, task, int_regression=Fa
     print(pd.Series([r[1] for r in records]).value_counts())
 
 ''' For control experiments '''
-def config_dnabert2_input_random_bins(fasta, label_key, save_prefix, labels, split_ratio=(0.8, 0.1, 0.1)):
+def config_dnabert2_input_random_bins(fasta, save_prefix, labels, split_ratio=(0.8, 0.1, 0.1)):
     records = []
     for record in SeqIO.parse(fasta, "fasta"):
         header = record.description
         value = None
-
-        # Extract value of input label parameter
-        for part in header.split("::")[0].split("|"):
-            if part.startswith(f"{label_key}="):
-                value = (float)(part.split("=")[1])
-
-        if value is None:
-            raise ValueError("Parameter 'label_key' must be in the input FASTA header as |label_key=value|")
 
         sequence = str(record.seq).upper()
         if "N" in sequence:

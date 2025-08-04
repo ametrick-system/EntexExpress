@@ -11,21 +11,21 @@
 - Tissue data from Tissue_Specificity.zip ("the tissue specificity of gene expression and functional signals of cis-regulatory elements") downloaded from the EN-TEx portal. This experiment uses ``expressed_gene.tissue_specificity/pc.txt``, which contains a list of protein coding genes and how many tissues they are expressed in
 - Human genome sequence from GENCODE Human Genome Release 48 primary assembly (GRCh38)
 
-## Input & Scripts
+## Input
 - ``extract_pc_promoters.py`` extracts the promoter region for each gene in pc.txt (1024 nucleotides upstream and 1024 nucleotides downstream) and stores results in ``promoters.bed`` with binary labels indicating whether that gene is expressed in ≥ 20 tissues with label counts 9945 0's and 6055 1's.
 - ``promoters.fa`` contains the actual promoter sequences from GRCh38 based on windows in ``promoters.bed`` (generated with bedtools command ``bedtools getfasta -fi ~/LargeFiles/GRCh38.primary_assembly.genome.fa -bed promoters.bed -s -name -fo promoters.fa``)
 - ``generate_input.py`` creates the 3 input CSV files: ``train.csv`` (80%), ``test.csv`` (10%), and ``dev.csv`` (10%) to be passed to DNABERT2 in finetuning, where each line contains a promoter sequence and a 1 or 0 indicating whether that gene is expressed in ≥ 20 tissues
--  ``train.csv``, ``test.csv``, and ``dev.csv`` are all stored in the ``input`` directory
+-  ``train.csv``, ``test.csv``, and ``dev.csv`` are all stored in the ``input`` directo
 
 ## Fine-tuning DNABERT2
 The script ``finetune.sh`` runs the DNABERT2 fine tuning with the default weights, steps, epochs, and learning rate. To run, first make the file executable (``chmod +x finetune.sh``) then run (``./finetune.sh``). All the output from the fine-tuning process is saved in ``finetune.log``.
 
 ## Results
-Here is a table that presents the results stored in ``output/results/entex_express_exp01/eval_results.json`` (note that each value is rounded to the nearest hundredth).
+Here is a table that presents the results stored in ``output/results/entex_express_exp01/eval_results.json`` (note that each value is rounded to the nearest hundredth). Additionally, ``plot_roc.py`` plots the Receiver Operating Characteristic (ROC) curve in ``roc_curve.png`` and computes the AUROC, which was 0.713 for this experiment.
 
 | Metric                      | Value  | Notes                                                                 |
 |-----------------------------|--------|-----------------------------------------------------------------------|
-| `eval_loss`                 | 0.6  | Slightly better than random (~0.693)                                  |
+| `eval_loss`                 | 0.600  | Slightly better than random (~0.693)                                  |
 | `eval_accuracy`             | 0.696  | Significantly better than random (~0.5)                                        |
 | `eval_f1`                   | 0.660  | Good measure of accuracy with input inbalances removed     |
 | `eval_precision`            | 0.677  | Equal to 1-(False Positives)                               |
