@@ -274,6 +274,6 @@ def config_dnabert2_input_random_bins(fasta, save_prefix, labels, split_ratio=(0
         df = pd.DataFrame(data, columns=["sequence", "label"])
         df.to_csv(f"{save_prefix}/{name}", index=False)
 
-    print(f"Saved {len(records)} total examples with label key {label_key} to {save_prefix}/")
+    print(f"Saved {len(records)} total examples with random labels {labels} to {save_prefix}/")
     print(pd.Series([r[1] for r in records]).value_counts())
 

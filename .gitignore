@@ -10,6 +10,14 @@ exp01/output/checkpoint-7800/optimizer.pt
 exp01/output/checkpoint-7800/pytorch_model.bin
 exp01/output/checkpoint-8000/optimizer.pt
 exp01/output/checkpoint-8000/pytorch_model.bin
+exp02_control/output/checkpoint-7600/optimizer.pt
+exp02_control/output/checkpoint-7600/pytorch_model.bin
+exp02_control/output/checkpoint-7800/optimizer.pt
+exp02_control/output/checkpoint-7800/pytorch_model.bin
+exp02_control/output/checkpoint-8000/optimizer.pt
+exp02_control/output/checkpoint-8000/pytorch_model.bin
+exp02/output/checkpoint-1400/optimizer.pt
+exp02/output/checkpoint-1400/pytorch_model.bin
 exp02/output/checkpoint-4200/optimizer.pt
 exp02/output/checkpoint-4200/pytorch_model.bin
 exp02/output/checkpoint-4400/optimizer.pt

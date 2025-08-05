@@ -2,7 +2,6 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 import os
 import torch
 import numpy as np
@@ -140,11 +139,11 @@ def plot_histogram_from_bed(save_path, bed_path, bed_cols, plot_col, fig_name, b
         plt.figure(figsize=(8, 5))
         plt.hist(bed[plot_col], bins=30, edgecolor="black")
 
-        colors = list(mcolors.CSS4_COLORS.keys())
+        colors = ["blue", "red", "purple", "green", "pink"] # I don't anticipate more than 5 classes
 
         for i in range(1,len(bins_list)):
             bin_x = bins_list[i]
-            plt.axvline(x=bin_x, color=colors[i % len(colors)], linestyle='--', label=labels[i-1])
+            plt.axvline(x=bin_x-1, color=colors[i % len(colors)], linestyle='--', label=labels[i-1])
        
         plt.title(f"Distribution of {plot_col} with Bins")
         plt.xlabel(f"{plot_col}")

@@ -14,7 +14,7 @@ export DATA_PATH=~/EntexExpress/exp02/input
 export OUTPUT_PATH=~/EntexExpress/exp02/output
 export RUN_NAME=entex_express_exp02
 
-export MAX_LENGTH=300 # 0.25 * (sequence length = 1200)
+export MAX_LENGTH=512 # 0.25 * (sequence length = 2048)
 export LR=3e-5
 
 echo "Starting fine-tuning..."
