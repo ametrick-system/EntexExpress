@@ -52,6 +52,12 @@ exp05/output/checkpoint-15800/optimizer.pt
 exp05/output/checkpoint-15800/pytorch_model.bin
 exp05/output/checkpoint-16000/optimizer.pt
 exp05/output/checkpoint-16000/pytorch_model.bin
+exp05/output/checkpoint-200/optimizer.pt
+exp05/output/checkpoint-200/pytorch_model.bin
+exp05/output/checkpoint-400/optimizer.pt
+exp05/output/checkpoint-400/pytorch_model.bin
+exp05/output/checkpoint-600/optimizer.pt
+exp05/output/checkpoint-600/pytorch_model.bin
 exp06/gencode.v46.annotation.gtf.feather
 exp06/output/checkpoint-1000/optimizer.pt
 exp06/output/checkpoint-1000/pytorch_model.bin
