@@ -61,6 +61,12 @@ exp05/output/checkpoint-600/pytorch_model.bin
 exp06/gencode.v46.annotation.gtf.feather
 exp06/output/checkpoint-1000/optimizer.pt
 exp06/output/checkpoint-1000/pytorch_model.bin
+exp06/output/checkpoint-1600/optimizer.pt
+exp06/output/checkpoint-1600/pytorch_model.bin
+exp06/output/checkpoint-2600/optimizer.pt
+exp06/output/checkpoint-2600/pytorch_model.bin
+exp06/output/checkpoint-2800/optimizer.pt
+exp06/output/checkpoint-2800/pytorch_model.bin
 exp06/output/checkpoint-600/optimizer.pt
 exp06/output/checkpoint-600/pytorch_model.bin
 exp06/output/checkpoint-800/optimizer.pt

@@ -1,0 +1,34 @@
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+Generating BED file...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Loading cached GTF...
+BED file saved: liver_promoters.bed
+Total promoters: 1452
+Tissue-specific promoters: 726
+Generating FASTA file...
+Visualizing the data...
+Liver_log_tpm_histogram.png.png saved in .
+Generating DNABERT2 input CSVs...
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/dna_model.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+/home/asm242/.conda/envs/alphagenome-env/lib/python3.11/site-packages/google/protobuf/runtime_version.py:98: UserWarning: Protobuf gencode version 5.27.2 is exactly one major version older than the runtime version 6.31.1 at alphagenome/protos/tensor.proto. Please update the gencode to avoid compatibility violations in the next runtime release.
+  warnings.warn(
+Saved 1452 total examples with label key log(TPM) to input/
+2.698    5
+2.941    4
+2.541    3
+1.684    3
+2.449    3
+        ..
+1.733    1
+3.555    1
+3.196    1
+2.165    1
+4.817    1
+Name: count, Length: 1255, dtype: int64
+Generated DNABERT2 input successfully!

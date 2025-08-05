@@ -1,12 +1,12 @@
 # EntexExpress: Using AI Models to Search for and Predict Patterns in EN-TEx Gene Expression Data
 
-**Research Question:** Can DNA sequence alone (specifically from promoter or other cis-regulatory regions) predict whether a gene is expressed in a given tissue — and possibly at what level?
+**Research Question:** What information can be predicted about a gene's level of expression across tissues and in general from DNA sequence alone (e.g. promoter region, start of gene, other cis-regulatory regions)?
 
-- **Subquestion 1 (Experiments 1-4):** How well can DNABERT2 predict whether a protein-coding gene is broadly expressed (i.e., ubiquitous, moderate, tissue-specific) based solely on its promoter sequence?
-- **Subquestion 2 (Experiment 5)**: How accurately can AlphaGenome predict RNAseq for Brain_Substantia_Nigra?
-- **Subquestion 3 (Experiments 6, 9):** How well can DNABERT2 classify a protein-coding gene as tissue-specific for a given tissue based solely on its promoter sequence?
-- **Subquestion 4 (Experiments 7-8):** How well can DNABERT2 *with an added regression head* (DNABERT2-regression) predict the *level of expression* of *any* protein-coding gene in a given tissue based solely on its promoter sequence?
-- **Subquestion 5 (Experiment 10):** How well can DNABERT2-regression predict the *level of expression* of a protein-coding gene that is *tissue-specific* to a given tissue based solely on its promoter sequence?
+1. **Subquestion 1 (Experiments 1-4):** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+2. **Subquestion 2 (Experiment 5):** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+3. **Subquestion 3 (Experiment 6):** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+4. **Subquestion 4:** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+
 
 ## Environment Setup (DNABERT-2)
 
