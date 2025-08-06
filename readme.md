@@ -2,10 +2,10 @@
 
 **Research Question:** What information can be predicted about a gene's level of expression across tissues and in general from DNA sequence alone (e.g. promoter region, start of gene, other cis-regulatory regions)?
 
-1. **Subquestion 1 (Experiments 1-4):** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
-2. **Subquestion 2 (Experiment 5):** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
-3. **Subquestion 3 (Experiment 6):** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
-4. **Subquestion 4:** Can the promoter sequence of a gene* in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+1. **Subquestion 1 (Experiments 1-4):** Can the promoter sequence of a protein-coding gene in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+2. **Subquestion 2 (Experiment 5):** Can the promoter sequence of a protein-coding gene in hg38 alone predict whether this gene is tissue-specific to a given tissue?
+3. **Subquestion 3 (Experiment 6):** Can the promoter sequence of a protein-coding gene in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
+4. **Subquestion 4:** Can the promoter sequence of a protein-coding gene in an individual’s personal genome alone predict whether this gene is tissue-specific to a given tissue for this individual?
 
 
 ## Environment Setup (DNABERT-2)

@@ -29,7 +29,7 @@ python3 train_regression.py \
     --per_device_eval_batch_size 16 \
     --gradient_accumulation_steps 1 \
     --learning_rate ${LR} \
-    --num_train_epochs 20 \
+    --num_train_epochs 10 \
     --fp16 \
     --save_steps 200 \
     --output_dir ${OUTPUT_PATH} \
