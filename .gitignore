@@ -125,8 +125,16 @@ exp14/output/checkpoint-3200/optimizer.pt
 exp14/output/checkpoint-3200/pytorch_model.bin
 exp14/output/checkpoint-3400/optimizer.pt
 exp14/output/checkpoint-3400/pytorch_model.bin
+regression_exp0/output/checkpoint-25200/optimizer.pt
+regression_exp0/output/checkpoint-25200/pytorch_model.bin
+regression_exp0/output/checkpoint-32200/optimizer.pt
+regression_exp0/output/checkpoint-32200/pytorch_model.bin
+regression_exp0/output/checkpoint-32400/optimizer.pt
+regression_exp0/output/checkpoint-32400/pytorch_model.bin
 regression_exp/output/checkpoint-25200/optimizer.pt
 regression_exp/output/checkpoint-25200/pytorch_model.bin
+regression_exp/output/checkpoint-30800/optimizer.pt
+regression_exp/output/checkpoint-30800/pytorch_model.bin
 regression_exp/output/checkpoint-32200/optimizer.pt
 regression_exp/output/checkpoint-32200/pytorch_model.bin
 regression_exp/output/checkpoint-32400/optimizer.pt
