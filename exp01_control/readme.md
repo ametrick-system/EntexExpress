@@ -11,7 +11,7 @@
 - ``promoters.fa`` exactly from Experiment 1
 
 ## Input and Finetuning
-- ``finetune.sh`` first generates the 3 input CSV files ``train.csv`` (80%), ``test.csv`` (10%), and ``dev.csv`` (10%) to be passed to DNABERT2 in finetuning, where each line contains a promoter sequence and a 1 or 0 label assigned randomly with equal probably
+- ``finetune.sh`` first generates the 3 input CSV files ``train.csv`` (80%), ``test.csv`` (10%), and ``dev.csv`` (10%) to be passed to DNABERT2 in finetuning, where each line contains a promoter sequence and a 1 or 0 label assigned randomly with equal probability
 - ``finetune.sh`` then runs the DNABERT2 fine tuning with the default weights, steps, epochs, and learning rate
 - To run, first make the file executable (``chmod +x finetune.sh``) then run (``./finetune.sh``). All the terminal output from the fine-tuning process is saved in ``finetune.log``.
 
@@ -24,7 +24,7 @@ Here is a table that presents the results stored in ``output/results/entex_expre
 | `Accuracy`             | 0.485  |
 | `F1`                   | 0.327  |
 | `Precision`            | 0.243  |
-| `Recall`               | 0.500  | True Positive Rate                                     |
+| `Recall`               | 0.500  |
 | `Matthews Correlation` | 0.000  |
 | `AUROC`                     | 0.501  |
 

@@ -12,9 +12,9 @@
 - Human genome sequence from GENCODE Human Genome Release 48 primary assembly (GRCh38)
 
 ## Input
-- ``extract_pc_promoters.py`` extracts the promoter region for each gene in pc.txt (1024 nucleotides upstream and 1024 nucleotides downstream) and stores results in ``promoters.bed`` with binary labels indicating whether that gene is expressed in ≥ 20 tissues with label counts 9945 0's and 6055 1's.
+- ``extract_pc_promoters.py`` extracts the promoter region for each gene in pc.txt (1024 nucleotides upstream and 1024 nucleotides downstream) and stores results in ``promoters.bed`` with binary labels indicating whether that gene is expressed in < 20 tissues with label counts 9945 0's and 6055 1's.
 - ``promoters.fa`` contains the actual promoter sequences from GRCh38 based on windows in ``promoters.bed`` (generated with bedtools command ``bedtools getfasta -fi ~/LargeFiles/GRCh38.primary_assembly.genome.fa -bed promoters.bed -s -name -fo promoters.fa``)
-- ``generate_input.py`` creates the 3 input CSV files: ``train.csv`` (80%), ``test.csv`` (10%), and ``dev.csv`` (10%) to be passed to DNABERT2 in finetuning, where each line contains a promoter sequence and a 1 or 0 indicating whether that gene is expressed in ≥ 20 tissues
+- ``generate_input.py`` creates the 3 input CSV files: ``train.csv`` (80%), ``test.csv`` (10%), and ``dev.csv`` (10%) to be passed to DNABERT2 in finetuning, where each line contains a promoter sequence and a 1 or 0 indicating whether that gene is expressed in < 20 tissues
 -  ``train.csv``, ``test.csv``, and ``dev.csv`` are all stored in the ``input`` directory
 
 ## Fine-tuning DNABERT2
