@@ -5,7 +5,7 @@
 1. **Subquestion 1 (Experiments 1-4):** Can the promoter sequence of a protein-coding gene in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
 2. **Subquestion 2 (Experiment 5):** Can the promoter sequence of a protein-coding gene in hg38 alone predict whether this gene is tissue-specific to a given tissue?
 3. **Subquestion 3 (Experiment 6):** Can the promoter sequence of a protein-coding gene in the human reference genome (hg38) alone predict whether this gene is broadly expressed (i.e. ubiquitous, moderate, tissue specific) in the human body?
-4. **Subquestion 4:** Can the promoter sequence of a protein-coding gene in an individual’s personal genome alone predict whether this gene is tissue-specific to a given tissue for this individual?
+4. **Subquestion 4:** Can the promoter sequence of a protein-coding gene in an individual’s *personal genome* alone predict whether this gene is tissue-specific to a given tissue for this *individual*?
 
 
 ## Environment Setup (DNABERT-2)

@@ -21,7 +21,7 @@ gtf_transcripts = gene_annotation.filter_to_longest_transcript(gtf_transcripts)
 transcript_extractor = transcript_utils.TranscriptExtractor(gtf_transcripts)
 
 # Access API with personal API key
-dna_model = dna_client.create("AIzaSyDaeU_HLHvVAN6tpNK3D82dTVx1olTzxuI")
+dna_model = dna_client.create("") # removed for github for security reasons :)
 
 # Pick 2048 bp around ENSEMBL gene ID ENSG00000188976
 interval = gene_annotation.get_gene_interval(gtf, gene_id='ENSG00000188976')
