@@ -34,4 +34,5 @@ pip install biopython
 conda create -n alphagenome-env python=3.11
 conda activate alphagenome-env
 pip install -U alphagenome
+pip install biopython
 ```
